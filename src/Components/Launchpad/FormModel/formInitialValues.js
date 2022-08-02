@@ -1,0 +1,57 @@
+import checkoutFormModel from "./checkoutFormModel";
+const {
+  formField: {
+    tokenAddress,
+    network,
+    rate,
+    hardCap,
+    maxBuy,
+    startDate,
+    endDate,
+    // firstRelease,
+    // vestingPeriod,
+    // eachRelease,
+    projectName,
+    logoUrl,
+    tokenName,
+    tokenSymbol,
+    tokenDecimals,
+    website,
+    facebook,
+    twitter,
+    github,
+    telegram,
+    instagram,
+    discord,
+    reddit,
+    description
+  },
+} = checkoutFormModel;
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+  [tokenAddress.name]: "",
+  [network.name]: "",
+  [rate.name]: "",
+  [hardCap.name]: "",
+  [maxBuy.name]: "",
+  [startDate.name]: "",
+  [endDate.name]: "",
+  // [firstRelease.name]: "",
+  // [vestingPeriod.name]: "",
+  // [eachRelease.name]: "",
+  [projectName.name]: "",
+  [logoUrl.name]: "",
+  [tokenName.name]: "",
+  [tokenSymbol.name]: "",
+  [tokenDecimals.name]: "",
+  [website.name]: "",
+  [facebook.name]: "",
+  [twitter.name]: "",
+  [github.name]: "",
+  [telegram.name]: "",
+  [instagram.name]: "",
+  [discord.name]: "",
+  [reddit.name]: "",
+  [description.name]: ""
+};

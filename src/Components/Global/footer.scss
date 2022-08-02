@@ -1,0 +1,41 @@
+
+.footer-content{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    .footer-social{
+        display: flex;
+        gap: 30px;
+        li{
+            a{
+                text-transform: uppercase;
+                font-size: 16px;
+                color: var(--white);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                svg{
+                    font-size: 30px;
+                }
+            }
+        }
+    }
+    
+}
+
+button.styles_scroll-to-top__2A70v {
+    background: #4B51A6;
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    box-shadow: none;
+    &::before{
+        content: "\f062";
+        font-family: "Font Awesome 6 free";
+        font-weight: 900;
+        font-size: 20px;
+    }
+    svg{
+        display: none;
+    }
+}

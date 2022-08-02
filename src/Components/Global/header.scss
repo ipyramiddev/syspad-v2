@@ -1,0 +1,164 @@
+.offcanvas {
+    background: #04072B;
+
+    button.btn-close {
+        position: absolute;
+        color: #fff;
+        right: 25px;
+        top: 20px;
+        font-size: 25px;
+    }
+
+    .offcanvas-header {
+        padding-top: 60px;
+    }
+
+    .offcanvas-body {
+        padding: 40px 50px 10px;
+    }
+}
+
+.navbar-nav {
+    gap: 20px;
+
+    a {
+        color: var(--white) !important;
+        font-weight: 500;
+        font-size: 18px;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .dropdown-toggle {
+        display: flex;
+
+        &::after {
+            margin-left: auto;
+            content: "\f107";
+            font-family: "Font Awesome 6 free";
+            font-weight: 900;
+            background: none;
+            border: 0;
+            font-size: 10px;
+        }
+    }
+
+    .nav-item>a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 5px 0px;
+    }
+}
+
+.dropdown-menu {
+    background: none;
+    padding: 0;
+}
+
+.topMenu {
+    padding: 30px 0;
+
+    .left-head {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        .navbar-toggler {
+            border: 0;
+            outline: none;
+            box-shadow: none;
+            color: var(--white);
+            padding: 6px 15px;
+            font-size: 34px;
+            color: #1B32FD;
+        }
+    }
+
+    .right-head {
+        a {
+            border-radius: 100px;
+            background-color: var(--white);
+            font-family: 'Inter';
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: -0.019em;
+            color: #000000;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 25px;
+            gap: 10px;
+
+            svg {
+                font-size: 27px;
+            }
+        }
+    }
+
+    .dropdown-list {
+        margin-left: 25px;
+
+        a {
+            font-weight: 300;
+            font-size: 16px;
+            position: relative;
+            padding: 10px 0px;
+            display: block;
+
+            &::before {
+                content: "\f068";
+                font-family: "Font Awesome 6 free";
+                font-weight: 900;
+                font-size: 13px;
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .dropdown-list-sub {
+        margin-left: 25px;
+    }
+
+    .dropdown-menu {
+        margin-top: 10px;
+    }
+
+    .menu-social {
+        border-top: 1px solid #1B1F48;
+        margin: 0 auto;
+        margin-top: 35px;
+        padding-top: 30px;
+        max-width: 266.05px;
+
+        .menu-social-title {
+            font-family: 'Inter';
+            font-weight: 500;
+            font-size: 14px;
+            text-align: center;
+            letter-spacing: 0.216em;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+
+        li {
+            margin-top: 20px;
+            a {
+                color: var(--white);
+                font-family: 'Inter';
+                font-weight: 600;
+                font-size: 16px;
+                letter-spacing: 0.356em;
+                text-transform: uppercase; 
+                color: var(--white);
+                display: flex;
+                align-items: center;
+                gap: 20px;
+
+                svg{
+                    font-size: 40px;
+                }
+            }
+        }
+    }
+}

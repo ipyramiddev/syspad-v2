@@ -1,0 +1,194 @@
+:root{
+  // Colors
+  --white: #fff;
+  --body-bg: #03062F; 
+
+  // fonts
+  --sf-bold: 'sf-pro-bold';
+  --sf-medium: 'sf-pro-medium';
+  --sf-regular: 'sf-pro-regular';
+}
+
+@import url(./assets/css/animate.css); 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css');
+@font-face {
+  font-family: 'sf-pro-regular';
+  src: url(./assets/fonts/sf-pro-regular.otf);
+}
+@font-face {
+  font-family: 'sf-pro-medium';
+  src: url(./assets/fonts/sf-pro-medium.otf);
+}
+@font-face {
+  font-family: 'sf-pro-bold';
+  src: url(./assets/fonts/sf-pro-bold.otf);
+}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  text-decoration: none;
+}
+
+body {
+  overflow: unset !important;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; 
+}
+
+body {
+  line-height: 1; 
+  font-family: var(--sf-regular);
+  background-color: var(--body-bg);
+}
+
+ol, ul {
+  list-style: none; 
+}
+
+blockquote, q {
+  quotes: none; 
+}
+
+blockquote {
+  &:before, &:after {
+    content: '';
+    content: none; 
+  }
+
+}
+
+q {
+  &:before, &:after {
+    content: '';
+    content: none; 
+  } 
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; 
+}
+
+
+.btn-lg{
+  a{
+    min-width: 266px;
+    min-height: 64px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter'; 
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px; 
+    letter-spacing: -0.019em;
+    color: var(--white);
+  }
+}
+
+.btn-bg1{
+  a{
+    background: #1A217E; 
+  }
+}
+.btn-bg2{
+  a{
+    background: #12175E; 
+  }
+}
+
+.pt-100{
+  padding-top: 100px;
+}
+.pb-100{
+  padding-bottom: 100px;
+}
+.py-100{
+  padding: 100px 0;
+}
+.pt-150{
+  padding-top: 150px;
+}
+.pb-150{
+  padding-bottom: 150px;
+}
+.py-150{
+  padding: 150px 0;
+}
+
+.ml-100 {
+  margin-left: 100px;
+}
+
+.mr-100 {
+  margin-right: 100px;
+}
+
+.pl-100 {
+  padding-left: 100px;
+}
+
+.pr-100 {
+  padding-right: 100px;
+}
+
+h1,.h1{
+  font-size: 80px;
+  font-weight: 800;
+}
+
+h2,.h2{
+  font-weight: 800;
+  font-size: 50px;
+}
+h3,.h3{
+  font-weight: 800;
+  font-size: 30px;
+}
+h4,.h4{
+  font-weight: 800;
+  font-size: 26px;
+}
+h5,.h5{
+  font-weight: 600;
+  font-size: 20px;
+}
+h6,.h6{
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.text-muted-v2 {
+  color: #616cfe !important;
+}
+
+.clear {
+  clear: both !important;
+}
+
+.MuiMenuItem-root {
+  color: white !important;
+}

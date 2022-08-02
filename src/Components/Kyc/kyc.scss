@@ -1,0 +1,92 @@
+.kyc-area {
+    .kyc-tab-content {
+        border: 1px solid #1d3b94;
+        border-radius: 10px;
+        margin-top: 40px;
+        background-color: #090e4e !important;
+        padding: 50px;
+    }
+
+    .kyc-tab {
+        font-size: 28px;
+        text-transform: unset !important;
+        padding: 30px;
+    }
+
+    .kyc-tab.Mui-selected {
+        font-weight: bold;
+        color: white !important;
+    }
+
+    .css-hip9hq-MuiPaper-root-MuiAppBar-root {
+        box-shadow: unset !important;
+        margin-top: 0px !important;
+        background-color: #090e4e !important;
+        padding: 0px 300px !important;
+    }
+    
+    .MuiTabs-indicator {
+        height: 1px !important;
+    }
+    
+    .css-19kzrtu {
+        padding: 0px !important;
+    }
+
+    .kyc-application {
+        .header {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .content {
+            margin-top: 100px;
+            margin-bottom: 200px;
+            color: #25bfec;
+            font-size: 200px; 
+        }
+
+        .content > div {
+            font-size: 32px;
+            color: white !important;
+        }
+    }
+
+    .kyc-portfolio, .kyc-vesting {
+        .header {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .sub-title {
+            font-size: 17px;
+        }
+
+        .content {
+            margin-top: 30px;
+        }
+
+        .portfolio-table th, .portfolio-table td {
+            font-size: 22px !important;
+        }
+
+        .portfolio-table thead th {
+            color: #3168da !important;
+            border-bottom: 1px solid rgba(68, 87, 114, 0.5) !important;
+            padding-top: 20px !important;
+            padding-bottom: 20px !important;
+        }
+
+        .portfolio-table tbody th, .portfolio-table tbody td {
+            color: #bed3ff!important;
+            border-bottom: 1px solid rgba(68, 87, 114, 0.5) !important;
+            padding-top: 30px !important;
+            padding-bottom: 30px !important;
+        }
+
+        .portfolio-table tbody th, .portfolio-table tbody .date-cell {
+            width: 300px !important;
+        }
+    }
+}
+

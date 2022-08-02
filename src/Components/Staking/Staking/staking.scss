@@ -1,0 +1,216 @@
+.staking-area {
+    padding: 50px 0 100px;
+
+    .alert {
+        background-color: #0d1257;
+        border-radius: 15px;
+    }
+
+    .stake-warning-icon {
+        width: 4.5% !important;
+        padding-left: unset !important;
+        line-height: 36px;
+    }
+
+    .warning-icon {
+        color: #ffce31;
+        font-size: 30px;
+    }
+
+    .sub-text {
+        margin-top: 10px;
+    }
+
+    .externelTokenBuy {
+        width: 37%;
+    }
+
+    .externelTokenBuy>div {
+        line-height: 40px;
+    }
+
+    .buyTokenBtn {
+        font-size: 16px;
+        border-radius: 20px;
+        background: #1a217e !important;
+        padding: 6px 20px;
+        font-weight: bold;
+    }
+}
+
+.font-20 {
+    font-size: 20px;
+}
+
+.font-12 {
+    font-size: 12px;
+}
+
+.font-14 {
+    font-size: 14px;
+}
+
+.menuImg {
+    width: 20px !important;
+    margin-right: 5px;
+}
+
+.MuiList-root {
+    background-color: #090e4e !important;
+}
+
+.MuiPaper-root {
+    background-color: unset !important;
+    margin-top: 5px !important;
+}
+
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root:hover {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+.css-19kzrtu {
+    padding: 30px !important;
+}
+
+.mt-50 {
+    margin-top: 50px !important;
+}
+
+.mb-50 {
+    margin-bottom: 50px !important;
+}
+
+.mt-100 {
+    margin-top: 100px !important;
+}
+
+.mt-30 {
+    margin-top: 30px !important;
+}
+
+.mt-20 {
+    margin-top: 20px !important;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.staking-status {
+    .status-content img {
+        width: 100px;
+        margin-top: 20px;
+    }
+
+    .status-header {
+        font-size: 28px;
+        color: #317de5;
+    }
+
+    .status-amount {
+        font-size: 100px;
+        font-weight: bold;
+    }
+
+    .buyTokenBtn {
+        font-size: 16px;
+        border-radius: 20px;
+        background: #1a217e !important;
+        padding: 10px 20px;
+        font-weight: bold;
+    }
+
+    .learnMoreBtn {
+        font-size: 16px;
+        border-radius: 20px;
+        background: #0e375c !important;
+        padding: 10px 20px;
+        font-weight: bold;
+    }
+}
+
+.staking-pane {
+    .staking-box {
+        border-radius: 5px;
+        border: 1px solid #1d3b94;
+    }
+
+    .css-hip9hq-MuiPaper-root-MuiAppBar-root {
+        box-shadow: unset !important;
+        margin-top: 0px !important;
+    }
+
+    .staking-tab {
+        color: #19205f !important;
+        font-size: 18px !important;
+        padding-top: 22px;
+        padding-bottom: 22px;
+        background-color: #191b37 !important;
+        opacity: 1 !important;
+    }
+
+    .staking-tab.Mui-selected {
+        color: #1b32fd !important;
+        background-color: #090e4e !important;
+    }
+
+    .staking-tab-content {
+        .staking-statement {
+            font-size: 22px;
+        }
+
+        .staking-input {
+            .main-input {
+                margin-top: 15px;
+                background-color: #040739 !important;
+                padding: 15px;
+                border-radius: 15px;
+
+                .element {
+                    float: left;
+                }
+
+                .max-amnt-btn {
+                    float: right !important;
+                    background-color: #05355a !important;
+                    font-size: 12px;
+                    padding: 0px 5px;
+                    margin-top: 25px;
+                }
+
+                .amount {
+                    font-size: 28px;
+                    background-color: transparent;
+                    border: unset !important;
+                    width: 55%;
+                    margin-top: 15px;
+                }
+                
+                .amount:focus-visible {
+                    outline: unset !important;
+                }
+            }
+
+            label {
+                font-size: 14px;
+            }
+        } 
+    }
+
+    .deposit-btn {
+        border-radius: 50px;
+        background-color: #1a217e;
+        padding: 20px 0px;
+        margin-top: 25px;
+    }
+
+    .deposit-btn:hover {
+        background-color: rgba(25, 118, 210, 0.4);
+    }
+
+    .button-progress {
+        position: absolute;
+        top: 73%;
+        left: 50%;
+    }
+}

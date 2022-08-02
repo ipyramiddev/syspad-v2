@@ -1,0 +1,81 @@
+.main-area {
+    h3 {
+        font-weight: unset !important;
+        font-size: 36px;
+    }
+    .main-form {
+        padding: 50px;
+        border: 1px solid #1d3b94;
+        border-radius: 10px;
+        background-color: #0d1257 !important;
+        margin-bottom: 100px;
+    }
+
+    .MuiStepLabel-label {
+        font-size: 20px;
+        color: rgba(255, 255, 255, 0.54);
+    }
+
+    .MuiStepLabel-label.MuiStepLabel-active {
+        color: rgba(255, 255, 255, 0.87);
+    }
+
+    .MuiStepLabel-label.MuiStepLabel-completed {
+        color: rgba(255, 255, 255, 0.87);
+    }
+
+    .MuiStepIcon-root {
+        width: 50px;
+        height: 50px;
+        color: rgba(255, 255, 255, 0.38);
+    }
+
+    .MuiInputLabel-root {
+        color: white;
+    }
+
+    .MuiInput-underline:before {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.42);
+    }
+
+    .MuiInputBase-input {
+        color: white;
+    }
+
+    .MuiButton-root {
+        color: rgba(255, 255, 255, 0.87);
+    }
+
+    .MuiButton-root:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .MuiSelect-icon {
+        color: rgba(255, 255, 255, 0.54);
+    }
+
+    .MuiOutlinedInput-notchedOutline {
+        border: 1px solid #73759d;
+    }
+
+    .MuiInputBase-root:hover .MuiOutlinedInput-notchedOutline {
+        border: 2px solid rgba(0, 0, 0, 0.87);
+    }
+
+    .MuiCheckbox-root {
+        color: rgba(255, 255, 255, 0.54);
+    }
+
+    .MuiCheckbox-colorSecondary.Mui-checked {
+        color: #3f51b5 !important;
+    }
+
+    .MuiList-root {
+        background-color: unset !important;
+        color: white;
+    }
+
+    .MuiListItem-root {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+}

@@ -1,0 +1,30 @@
+.kyc-footer-area {
+    margin-top: 100px;
+    .text-kyc-footer {
+        color: #43607e;
+    }
+
+    .footer-content{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 50px;
+        justify-content: right;
+
+        .footer-kyc{
+            display: flex;
+            gap: 30px;
+            margin-left: auto;
+            li{
+                a{
+                    font-size: 16px;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    svg{
+                        font-size: 30px;
+                    }
+                }
+            }
+        }
+    }
+}

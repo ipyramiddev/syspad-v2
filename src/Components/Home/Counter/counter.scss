@@ -1,0 +1,17 @@
+.counter-area {}
+
+.counter-item {
+    background: #050941;
+    border: 1px solid #6EE8FC;
+    box-shadow: 0px 37px 34px rgba(0, 0, 0, 0.11);
+    border-radius: 9px;
+    padding: 40px 20px;
+
+    span {
+        font-size: 15px;
+        font-weight: 600;
+        text-align: center;
+        letter-spacing: 0.216em;
+        text-transform: uppercase;
+    }
+}
