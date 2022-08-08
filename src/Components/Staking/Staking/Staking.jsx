@@ -408,7 +408,7 @@ const Staking = () => {
                                             onClick={approveToken}
                                             disabled={isLoading}
                                         >
-                                            Authorize Wallet
+                                            Withdraw
                                         </Button>    
                                     )}
                                     {(isLoading) && (
