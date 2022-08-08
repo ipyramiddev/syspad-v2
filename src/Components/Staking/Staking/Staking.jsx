@@ -309,7 +309,7 @@ const Staking = () => {
                                 aria-label="full width tabs example"
                                 >
                                 <Tab className="staking-tab" label="Deposit & Lock" {...a11yProps(0)} />
-                                <Tab className="staking-tab" label="Withdraw" {...a11yProps(1)} disabled/>
+                                <Tab className="staking-tab" label="Withdraw" {...a11yProps(1)} />
                                 </Tabs>
                             </AppBar>
                             <SwipeableViews
@@ -371,7 +371,57 @@ const Staking = () => {
                                     </div>
                                 </TabPanel>
                                 <TabPanel value={value} index={1} dir={theme.direction}>
-                                Item Two
+                                    <div className="staking-statement text-white">
+                                        STAKE SYSPAD TO PARTICIPATE IN ALLOWLISTS FOR UPCOMING IDOS.
+                                    </div>
+
+                                    <div className="staking-input mt-50">
+                                        <label className="text-white">Stake Amount</label>
+                                        <div className="main-input">
+                                            <img className="element" src={syspadImg} alt="SYSPAD"></img>
+                                            <input type="text" value={depositAmnt} name="amount" className='element amount text-white' onChange={(e) => setDepositAmount(e.target.value)} maxlength="15" required />
+                                            <Button
+                                                className="max-amnt-btn text-white element"
+                                                onClick={setMaxAmount}
+                                            >
+                                                MAX AMOUNT
+                                            </Button>
+                                            <div className="clear"></div>
+                                        </div>
+                                    </div>
+
+                                    <div className="text-center text-white mt-20">Balance: {totalBalance} SYSPAD</div>
+                                    
+                                    <div className="button-wrapper">
+                                    {(is_approved) && (
+                                        <Button
+                                            className="deposit-btn text-white w-full"
+                                            onClick={depositToken}
+                                            disabled={isLoading}
+                                        >
+                                            Staking & Lock
+                                        </Button>    
+                                    )}
+                                    {!(is_approved) && (
+                                        <Button
+                                            className="deposit-btn text-white w-full"
+                                            onClick={approveToken}
+                                            disabled={isLoading}
+                                        >
+                                            Authorize Wallet
+                                        </Button>    
+                                    )}
+                                    {(isLoading) && (
+                                        <CircularProgress
+                                            size={24}
+                                            className="button-progress"
+                                        />
+                                    )}
+                                    </div>
+
+                                    <div className="text-center text-muted-v2 font-14 mt-20">
+                                        Your SYSPAD tokens will be locked for 14 days. After that time, you are free to withdraw at anytime.
+                                    </div>
                                 </TabPanel>
                             </SwipeableViews>
                         </Box>
