@@ -214,3 +214,55 @@
         left: 50%;
     }
 }
+
+.main-input {
+    margin-top: 15px;
+    background-color: #040739 !important;
+    padding: 15px;
+    border-radius: 15px;
+
+    .element {
+        float: left;
+    }
+
+    .max-amnt-btn {
+        float: right !important;
+        background-color: #05355a !important;
+        font-size: 12px;
+        padding: 0px 5px;
+        margin-top: 25px;
+    }
+
+    .amount {
+        font-size: 28px;
+        background-color: transparent;
+        border: unset !important;
+        width: 55%;
+        margin-top: 15px;
+    }
+    
+    .amount:focus-visible {
+        outline: unset !important;
+    }
+}
+
+label {
+    font-size: 14px;
+}
+
+.deposit-btn {
+border-radius: 50px;
+background-color: #1a217e;
+padding: 20px 0px;
+margin-top: 25px;
+}
+
+.deposit-btn:hover {
+background-color: rgba(25, 118, 210, 0.4);
+}
+
+.button-progress {
+position: absolute;
+top: 73%;
+left: 50%;
+}
