@@ -18,11 +18,11 @@ import PrivateSaleDetails from './PrivateSaleDetails';
 
 const LaunchpadPrivateSale = () => {
     // const contract = "0xde67400c78034103aaa07ba25bca9216bc9e1114"; // for Ropstein
-    const contract = "0x9f80c03bc200e14AC4c9eB5Fef19D5EA59246828"; // for syscoin
+    const contract = "0x6168c2F045Fc54aF408169e83969553B75Dcd13a"; // for syscoin
     // const token_contract = "0x04dbe249f46418542df912184dfa79699baee80b"; // for Ropstein
-    const token_contract = "0x569533592d84171fB6c86Ac484a8Dc732a79c814"; // for syscoin
+    const token_contract = "0x51C53b90478aCC57E2cc7e1736E4b26c6E633Eac"; // for syscoin
     // const token_usdc_contract = "0x14b2e77064c4589a3c326974807a2bdb138da688"; //Ropsten USDC address
-    const token_usdc_contract = "0x9E0A160597a3d67cbE56218e783BC17D37b74362"; //syscoing USDC address
+    const token_usdc_contract = "0x2bF9b864cdc97b08B6D79ad4663e71B8aB65c45c"; //syscoin USDC address
 
     const [endTime, setEndTime] = useState(0);
     const [current, setCurrentTime] = useState(0);

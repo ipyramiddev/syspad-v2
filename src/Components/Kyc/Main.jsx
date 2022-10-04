@@ -187,9 +187,9 @@ const KycMain = () => {
     // const [i_isClaim, setIDOClaimable] = useState(false);
 
     // const contract_address = "0xde67400c78034103aaa07ba25bca9216bc9e1114"; // for Ropsten privatesale
-    const contract_address = "0x9f80c03bc200e14AC4c9eB5Fef19D5EA59246828"; // for syscoin privatesale
+    const contract_address = "0x6168c2F045Fc54aF408169e83969553B75Dcd13a"; // for syscoin privatesale
     // const staking_contract = "0x8083d959537249e83b9166fafb315688f4426874"; // for ropsten
-    const staking_contract = "0x5098BC1f0256A22F204493112134c4895ad6A639"; // for syscoin
+    const staking_contract = "0xfDd20409e0Eccd4bb15D2D9F7B2cD46CA40A530D"; // for syscoin
     // const ido_contract = ""; // for ropsten
     // const ido_contract = "0x8467cdd0Aa00671dC85C2A0dD1f3F6da89D37fb6" // for syscoin
 

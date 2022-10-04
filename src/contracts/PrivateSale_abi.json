@@ -282,13 +282,6 @@
   },
   {
     "inputs": [],
-    "name": "refundMe",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "refundStartDate",
     "outputs": [
       {
@@ -368,19 +361,6 @@
   {
     "inputs": [],
     "name": "stopPrivateSale",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "contract IERC20",
-        "name": "tokenAddress",
-        "type": "address"
-      }
-    ],
-    "name": "takeTokens",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

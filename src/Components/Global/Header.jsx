@@ -4,6 +4,7 @@ import { useState } from "react";
 import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 import { Link } from "react-router-dom";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import socials from "../../assets/data/socials";
 import Logo from "../../assets/img/logo-min.svg";
 import Logo2 from "../../assets/img/logo.png";
@@ -20,6 +21,7 @@ import { BiWallet } from "react-icons/bi";
 import "./header.scss";
 const Header = () => {
     const [connectedAccount, setConnectedAccount] = useState(false);
+    const [copyState, setCopyState] = useState(false);
 
     async function _connectMetamask() {
         const web3Modal = new Web3Modal();
@@ -36,12 +38,13 @@ const Header = () => {
     }
 
     const wallet_account = localStorage.getItem("setAddress");
+    const full_address = localStorage.getItem("setFullAddress");
 
-    function _disconnectWallet() {
-        localStorage.removeItem("setAddress");
-        localStorage.removeItem("setFullAddress");
-        setConnectedAccount(false);
-    }
+    // function _disconnectWallet() {
+    //     localStorage.removeItem("setAddress");
+    //     localStorage.removeItem("setFullAddress");
+    //     setConnectedAccount(false);
+    // }
 
     return (
         <nav className="navbar topMenu">
@@ -70,9 +73,14 @@ const Header = () => {
                         </Link>
                     )}
                     {(connectedAccount || wallet_account) && (
-                        <Link to="#" onClick={_disconnectWallet}>
-                            <BiWallet /> {connectedAccount || wallet_account}
-                        </Link>
+                        <CopyToClipboard text={full_address} onCopy={() => setCopyState(true)}>
+                            <Link to="#">
+                                <BiWallet /> {connectedAccount || wallet_account}
+                            </Link>
+                        </CopyToClipboard>
+                        // <Link to="#" onClick={_disconnectWallet}>
+                        //     <BiWallet /> {connectedAccount || wallet_account}
+                        // </Link>
                     )}
                 </div>
                 <div

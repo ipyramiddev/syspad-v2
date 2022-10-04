@@ -66,6 +66,7 @@ const Staking = () => {
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
     const [depositAmnt, setDepositAmount] = useState("0.00");
+    const [withdrawAmnt, setWithdrawAmount] = useState("0.00");
     // const [depositBalance, setDepositBalance] = useState(0);
     const [totalBalance, setTotalBalance] = useState(0);
     const [totalStaked, setTotalStaked] = useState("0.00");
@@ -73,9 +74,9 @@ const Staking = () => {
     const [is_approved, setTokenApprove] = useState(false);
     const [isLoading, setLoading] = useState(false);
     // const staking_contract = "0x8083d959537249e83b9166fafb315688f4426874"; // for ropsten
-    const staking_contract = "0x5098BC1f0256A22F204493112134c4895ad6A639";
+    const staking_contract = "0xfDd20409e0Eccd4bb15D2D9F7B2cD46CA40A530D";
     // const token_contract = "0x04dbe249f46418542df912184dfa79699baee80b"; // for ropsten
-    const token_contract = "0x569533592d84171fB6c86Ac484a8Dc732a79c814";
+    const token_contract = "0x51C53b90478aCC57E2cc7e1736E4b26c6E633Eac";
 
     let { ethereum } = window;
     let wallet_account = localStorage.getItem("setFullAddress");
@@ -146,9 +147,20 @@ const Staking = () => {
         setDepositAmount(totalBalance);
     };
 
+    const setMaxWithdrawAmount = () => {
+        setWithdrawAmount(myStaked);
+    };
+
     const depositToken = async () => {
         setLoading(true);
         let tx = await contract.stake(ethers.utils.parseEther(depositAmnt.toString()));
+        await tx.wait();
+        setLoading(false);
+    };
+
+    const withdrawToken = async () => {
+        setLoading(true);
+        let tx = await contract.withdraw(ethers.utils.parseEther(withdrawAmnt.toString()));
         await tx.wait();
         setLoading(false);
     };
@@ -370,19 +382,19 @@ const Staking = () => {
                                         Your SYSPAD tokens will be locked for 14 days. After that time, you are free to withdraw at anytime.
                                     </div>
                                 </TabPanel>
-                                <TabPanel value={value} index={1} dir={theme.direction}>
+                                <TabPanel className="staking-tab-content" value={value} index={1} dir={theme.direction}>
                                     <div className="staking-statement text-white">
-                                        STAKE SYSPAD TO PARTICIPATE IN ALLOWLISTS FOR UPCOMING IDOS.
+                                        WITHDRAW YOUR SYSPAD NOW.
                                     </div>
 
                                     <div className="staking-input mt-50">
                                         <label className="text-white">Stake Amount</label>
                                         <div className="main-input">
                                             <img className="element" src={syspadImg} alt="SYSPAD"></img>
-                                            <input type="text" value={depositAmnt} name="amount" className='element amount text-white' onChange={(e) => setDepositAmount(e.target.value)} maxlength="15" required />
+                                            <input type="text" value={withdrawAmnt} name="amount" className='element amount text-white' onChange={(e) => setWithdrawAmount(e.target.value)} maxlength="15" required />
                                             <Button
                                                 className="max-amnt-btn text-white element"
-                                                onClick={setMaxAmount}
+                                                onClick={setMaxWithdrawAmount}
                                             >
                                                 MAX AMOUNT
                                             </Button>
@@ -390,27 +402,16 @@ const Staking = () => {
                                         </div>
                                     </div>
 
-                                    <div className="text-center text-white mt-20">Balance: {totalBalance} SYSPAD</div>
+                                    <div className="text-center text-white mt-20">Balance: {myStaked} SYSPAD</div>
                                     
                                     <div className="button-wrapper">
-                                    {(is_approved) && (
                                         <Button
                                             className="deposit-btn text-white w-full"
-                                            onClick={depositToken}
-                                            disabled={isLoading}
-                                        >
-                                            Staking & Lock
-                                        </Button>    
-                                    )}
-                                    {!(is_approved) && (
-                                        <Button
-                                            className="deposit-btn text-white w-full"
-                                            onClick={approveToken}
+                                            onClick={withdrawToken}
                                             disabled={isLoading}
                                         >
                                             Withdraw
                                         </Button>    
-                                    )}
                                     {(isLoading) && (
                                         <CircularProgress
                                             size={24}

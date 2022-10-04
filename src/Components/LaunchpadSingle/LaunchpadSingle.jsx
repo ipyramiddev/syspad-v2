@@ -26,8 +26,9 @@ const LaunchpadSingle = (props) => {
   const [stakeAmount, setStakeAmount] = useState(0);
   const [weiRaised, setWeiRaised] = useState(0);
   const [data, setData] = useState([]);
+  const [isScrollTop, setScrollTop] = useState(true);
   // const staking_contract = "0x8083d959537249e83b9166fafb315688f4426874"; // ropsten
-  const staking_contract = "0x5098BC1f0256A22F204493112134c4895ad6A639"; // syscoin
+  const staking_contract = "0x500dD81f4612eda2027EFe69FA6aBDfFb3bD8A4c"; // syscoin
   const stakingLimit = 50000;
   // const stakingLimit = 250;
 
@@ -37,8 +38,12 @@ const LaunchpadSingle = (props) => {
   let wallet_account = localStorage.getItem("setFullAddress");
   let contract = null;
 
-  useEffect(() => {
+  if(isScrollTop) {
     window.scrollTo(0, 0);
+    setScrollTop(false);
+  }
+  
+  useEffect(() => {
     getProject();
   });
 
