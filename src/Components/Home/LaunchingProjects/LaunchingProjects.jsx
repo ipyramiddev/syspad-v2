@@ -30,18 +30,18 @@ const LaunchingProjects = () => {
     }, []);
 
     useEffect(() => {
-        if(typeof window.ethereum !== undefined) {
+        if (typeof window.ethereum !== undefined && window.ethereum && idoProjects.token_address) {
             async function contract_interact() {
-              await window.ethereum.enable();
-    
-              const provider = new ethers.providers.Web3Provider(window.ethereum);
-              const signer = provider.getSigner();
-    
-              const tokenContract = new ethers.Contract(idoProjects.token_address, token_abi, signer);
-              let total = await tokenContract.getFirstPrivateSaleAmount();
-              setTotalSale(total.toString() / (10**18));
+                await window.ethereum.enable();
+
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const signer = provider.getSigner();
+
+                const tokenContract = new ethers.Contract(idoProjects.token_address, token_abi, signer);
+                let total = await tokenContract.getFirstPrivateSaleAmount();
+                setTotalSale(total.toString() / (10 ** 18));
             }
-    
+
             contract_interact();
         }
     }, [idoProjects])
@@ -50,7 +50,7 @@ const LaunchingProjects = () => {
         getDocs(projectCollectionRef)
             .then(response => {
                 const projects = response.docs.map(doc => ({
-                    data: doc.data(), 
+                    data: doc.data(),
                     id: doc.id
                 }));
                 setProjects(projects);
@@ -69,8 +69,8 @@ const LaunchingProjects = () => {
                     </div>
                 </div>
                 <div className="row mt-4">
-                    {idoProjects.map(project => (
-                        <div className="col-lg-4 col-md-6">
+                    {idoProjects.map((project, index) => (
+                        <div className="col-lg-4 col-md-6" key={index}>
                             <div className="projects-item mt-4">
                                 <Link to='/launchpad_single#' className='projects-images' state={project.id} >
                                     <img src={img4} alt="images" />

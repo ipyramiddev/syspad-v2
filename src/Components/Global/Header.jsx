@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 import { Link } from "react-router-dom";
-import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import socials from "../../assets/data/socials";
 import Logo from "../../assets/img/logo-min.svg";
 import Logo2 from "../../assets/img/logo.png";
@@ -18,10 +18,19 @@ import {
 import { AiOutlineDollarCircle, AiOutlineMenu } from "react-icons/ai";
 import { BiWallet } from "react-icons/bi";
 
+// import firebase
+import { query, where, getDocs } from 'firebase/firestore';
+import { adminCollectionRef } from '../../lib/firebase.collections'
+
+import { useAppContext } from '../../context/AppContext'
+
 import "./header.scss";
 const Header = () => {
     const [connectedAccount, setConnectedAccount] = useState(false);
     const [copyState, setCopyState] = useState(false);
+
+    const appContext = useAppContext()
+    let { ethereum } = window;
 
     async function _connectMetamask() {
         const web3Modal = new Web3Modal();
@@ -31,21 +40,55 @@ const Header = () => {
         const provider = new ethers.providers.Web3Provider(connection);
         const signer = provider.getSigner();
         const wallet = await signer.getAddress();
-        localStorage.setItem('setFullAddress', wallet);
-        const tempwallet = wallet.slice(0, 6) + "..." + wallet.slice(-5);
-        localStorage.setItem("setAddress", tempwallet);
-        setConnectedAccount(tempwallet);
-    }
 
-    const wallet_account = localStorage.getItem("setAddress");
-    const full_address = localStorage.getItem("setFullAddress");
+        const tempwallet = wallet.slice(0, 6) + "..." + wallet.slice(-5);
+        setConnectedAccount(tempwallet);
+
+        appContext.setUser({
+            'full_addr': wallet,
+            'address': tempwallet
+        })
+        localStorage.setItem('setFullAddress', wallet);
+    }
 
     // function _disconnectWallet() {
     //     localStorage.removeItem("setAddress");
     //     localStorage.removeItem("setFullAddress");
     //     setConnectedAccount(false);
     // }
-
+    useEffect(() => {
+        let wallet = localStorage.getItem("setFullAddress");
+        if (wallet) {
+            const tempwallet = wallet.slice(0, 6) + "..." + wallet.slice(-5);
+            appContext.setUser(prevState => ({
+                ...prevState,
+                full_addr: wallet,
+                address: tempwallet,
+            }))
+            setConnectedAccount(tempwallet);
+        }
+    }, [])
+    useEffect(() => {
+        if (appContext.user.full_addr && !appContext.user.isAdmin) {
+            async function getAdmin() {
+                const q = query(adminCollectionRef, where("wallet_address", "==", appContext.user.full_addr))
+                const querySnapshot = await getDocs(q)
+                console.log(querySnapshot.docs.length + 1)
+                if (querySnapshot.docs.length > 0) {
+                    appContext.setUser(prevState => ({
+                        ...prevState,
+                        isAdmin: true
+                    }))
+                } else {
+                    appContext.setUser(prevState => ({
+                        ...prevState,
+                        isAdmin: false
+                    }))
+                }
+            }
+            getAdmin();
+        }
+    }, [appContext])
     return (
         <nav className="navbar topMenu">
             <div className="container">
@@ -67,25 +110,25 @@ const Header = () => {
                     </a> */}
                 </div>
                 <div className="right-head">
-                    {!(connectedAccount || wallet_account) && (
+                    {!(connectedAccount) && (
                         <Link to="#" onClick={_connectMetamask}>
                             <BiWallet /> Connect Wallet
                         </Link>
                     )}
-                    {(connectedAccount || wallet_account) && (
-                        <CopyToClipboard text={full_address} onCopy={() => setCopyState(true)}>
+                    {(connectedAccount) && (
+                        <CopyToClipboard text={"full_address"} onCopy={() => setCopyState(true)}>
                             <Link to="#">
-                                <BiWallet /> {connectedAccount || wallet_account}
+                                <BiWallet /> {connectedAccount}
                             </Link>
                         </CopyToClipboard>
                         // <Link to="#" onClick={_disconnectWallet}>
-                        //     <BiWallet /> {connectedAccount || wallet_account}
+                        //     <BiWallet /> {connectedAccount}
                         // </Link>
                     )}
                 </div>
                 <div
                     className="offcanvas offcanvas-start"
-                    tabindex="-1"
+                    tabIndex="-1"
                     id="offcanvasNavbar"
                     aria-labelledby="offcanvasNavbarLabel"
                 >
@@ -95,7 +138,7 @@ const Header = () => {
                         </h5>
                         <button
                             type="button"
-                            class="btn-close"
+                            className="btn-close"
                             data-bs-dismiss="offcanvas"
                             aria-label="Close"
                         >
@@ -146,26 +189,30 @@ const Header = () => {
                                     </li>
                                 </ul>
                             </li>
-                            <li className="nav-item dropdown">
-                                <a
-                                    className="nav-link dropdown-toggle show"
-                                    href="#"
-                                    id="offcanvasNavbarDropdown3"
-                                    role="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="true"
-                                >
-                                    <RiStoreFill /> Launchpad
-                                </a>
-                                <ul
-                                    className="dropdown-menu show"
-                                    aria-labelledby="offcanvasNavbarDropdown3"
-                                >
-                                    <li className="dropdown-list">
-                                        <Link to="/create_launchpad">Create Launchpad</Link>
-                                    </li>
-                                </ul>
-                            </li>
+                            {
+                                appContext.user.isAdmin &&
+                                <li className="nav-item dropdown">
+                                    <a
+                                        className="nav-link dropdown-toggle show"
+                                        href="#"
+                                        id="offcanvasNavbarDropdown3"
+                                        role="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="true"
+                                    >
+                                        <RiStoreFill /> Launchpad
+                                    </a>
+
+                                    <ul
+                                        className="dropdown-menu show"
+                                        aria-labelledby="offcanvasNavbarDropdown3"
+                                    >
+                                        <li className="dropdown-list">
+                                            <Link to="/create_launchpad">Create Launchpad</Link>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
                         </ul>
                         <ul className="menu-social">
                             <div className="menu-social-title">Join the community</div>

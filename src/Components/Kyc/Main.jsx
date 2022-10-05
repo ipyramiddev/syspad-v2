@@ -135,30 +135,30 @@ const CustomFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-  
+
     return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`full-width-tabpanel-${index}`}
-        aria-labelledby={`full-width-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box sx={{ p: 3 }}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`full-width-tabpanel-${index}`}
+            aria-labelledby={`full-width-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box sx={{ p: 3 }}>
+                    <Typography>{children}</Typography>
+                </Box>
+            )}
+        </div>
     );
 }
-  
+
 TabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.number.isRequired,
     value: PropTypes.number.isRequired,
 };
-  
+
 function a11yProps(index) {
     return {
         id: `full-width-tab-${index}`,
@@ -210,11 +210,11 @@ const KycMain = () => {
     function createData(name, type, invested, current_price, to_return, return_in_dollar) {
         return { name, type, invested, current_price, to_return, return_in_dollar };
     }
-    
+
     function createVestingData(name, tokenP, tokenA, total_token, date, action, is_claim) {
         return { name, tokenP, tokenA, total_token, date, action, is_claim };
     }
-      
+
     const rows = [
         createData('Name', 'NFT Sale', "2,000", "5,000", 150, "3,000"),
         createData('Name', 'NFT Sale', "2,000", "5,000", 150, "3,000"),
@@ -223,7 +223,7 @@ const KycMain = () => {
         createData('Name', 'NFT Sale', "2,000", "5,000", 150, "3,000"),
         createData('Name', 'NFT Sale', "2,000", "5,000", 150, "3,000")
     ];
-    
+
     const rows_vesting = [
         createVestingData('SYSPAD PrivateSale', '12.5%', contribution, totalContribution, nextClaimDate, <Button className='claim-btn text-white element' onClick={claimPrivateSaleTokens}>Claim Tokens</Button>, isClaim),
         createVestingData('Staking Reward', '#', stakeReward, totalStaked, "#", <Button className='claim-btn text-white element' onClick={claimStakingRewards}>Claim Rewards</Button>, isRewardClaim),
@@ -231,18 +231,18 @@ const KycMain = () => {
     ];
 
     useEffect(() => {
-        if(ethereum) {
+        if (ethereum) {
             async function contract_interact() {
                 let provider = new ethers.providers.Web3Provider(ethereum);
                 let signer = provider.getSigner();
                 contract = new ethers.Contract(contract_address, abi, signer);
-                
-                contract._contributions(wallet_account, 0).then((result)=>{
-                    setContribution(parseInt(result.toString() / (10**18)) * 100);
+
+                contract._contributions(wallet_account, 0).then((result) => {
+                    setContribution(parseInt(result.toString() / (10 ** 18)) * 100);
                 }).catch('error', console.error)
 
-                contract.checkContribution(wallet_account).then((result)=>{
-                    setTotalContribution(parseInt(result.toString() / (10**18)) * 100);
+                contract.checkContribution(wallet_account).then((result) => {
+                    setTotalContribution(parseInt(result.toString() / (10 ** 18)) * 100);
                 }).catch('error', console.error)
 
                 const _endDate = await contract.endPrivateSale();
@@ -253,16 +253,16 @@ const KycMain = () => {
 
                 const _initial = await contract._initialTimestamp(wallet_account);
                 setInitialTime(parseInt(_initial.toString()));
-                let date = new Date((initialTime + 3600*24*30) * 1000);
+                let date = new Date((initialTime + 3600 * 24 * 30) * 1000);
                 setNextClaimDate(date.toUTCString());
 
                 s_contract = new ethers.Contract(staking_contract, staking_abi, signer);
 
                 const _stakeAmount = await s_contract.stakeAmount(wallet_account);
-                setTotalStaked(Math.ceil(_stakeAmount.toString() / (10**18)));
+                setTotalStaked(Math.ceil(_stakeAmount.toString() / (10 ** 18)));
 
                 const _reward = await s_contract.getEarnedRewardTokens(wallet_account);
-                setReward(parseInt(_reward.toString()) / (10**18));
+                setReward(parseInt(_reward.toString()) / (10 ** 18));
 
                 // i_contract = new ethers.Contract(ido_contract, ido_abi, signer);
 
@@ -272,16 +272,16 @@ const KycMain = () => {
 
                 // const _iEnd = await i_contract.endDate();
                 // setIDOEnd(parseInt(_iEnd.toString()));
-            } 
+            }
 
             contract_interact();
         }
 
-        if(endDate < current && contribution > 0) {
+        if (endDate < current && contribution > 0) {
             setIsClaimable(true);
         }
 
-        if(stakeReward > 0) {
+        if (stakeReward > 0) {
             setRewardClaim(true);
         }
 
@@ -289,12 +289,12 @@ const KycMain = () => {
         //     setIDOClaimable(true);
         // }
     });
-    
+
     async function claimPrivateSaleTokens() {
         let tx = await contract.claimTokens();
         await tx.wait();
 
-        if(endDate < current && contribution > 0) {
+        if (endDate < current && contribution > 0) {
             setIsClaimable(true);
         }
     }
@@ -303,7 +303,7 @@ const KycMain = () => {
         let tx = await s_contract.claim();
         await tx.wait();
 
-        if(stakeReward > 0) {
+        if (stakeReward > 0) {
             setRewardClaim(true);
         }
     }
@@ -322,14 +322,14 @@ const KycMain = () => {
             <Box className="kyc-box">
                 <AppBar position="static">
                     <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    textColor="inherit"
-                    aria-label="full width tabs example"
+                        value={value}
+                        onChange={handleChange}
+                        textColor="inherit"
+                        aria-label="full width tabs example"
                     >
                         <Tab className="kyc-tab text-muted-v2" label="KYC Application" {...a11yProps(3)} />
-                        <Tab className="kyc-tab text-muted-v2" label="Portfolio" {...a11yProps(1)}/>
-                        <Tab className="kyc-tab text-muted-v2" label="Upcoming Vesting" {...a11yProps(2)}/>
+                        <Tab className="kyc-tab text-muted-v2" label="Portfolio" {...a11yProps(1)} />
+                        <Tab className="kyc-tab text-muted-v2" label="Upcoming Vesting" {...a11yProps(2)} />
                     </Tabs>
                 </AppBar>
                 <div className="container">
@@ -352,7 +352,7 @@ const KycMain = () => {
                         <TabPanel className="kyc-tab-content" value={value} index={0} dir={theme.direction}>
                             <div className="kyc-application text-white">
                                 {
-                                    KYCStep == 0 && 
+                                    KYCStep == 0 &&
                                     <>
                                         <div className="header">
                                             KYC Application
@@ -366,7 +366,7 @@ const KycMain = () => {
                                     </>
                                 }
                                 {
-                                    KYCStep == 1 && 
+                                    KYCStep == 1 &&
                                     <>
                                         <div className="header">
                                             Begin your ID-Verification
@@ -505,23 +505,23 @@ const KycMain = () => {
                                                     >
                                                         <Grid item xs={4} >
                                                             <div className={`verify-type-box ${documentType == 0 ? 'active' : ''}`} onClick={() => setDocumentType(0)}>
-                                                                <AiOutlineAndroid className='img-verify'/>
+                                                                <AiOutlineAndroid className='img-verify' />
                                                                 <p>PASSPORT</p>
-                                                                {documentType == 0 && <AiFillCheckCircle className='img-check'/>}
+                                                                {documentType == 0 && <AiFillCheckCircle className='img-check' />}
                                                             </div>
                                                         </Grid>
                                                         <Grid item xs={4} >
                                                             <div className={`verify-type-box ${documentType == 1 ? 'active' : ''}`} onClick={() => setDocumentType(1)}>
-                                                                <AiOutlineAndroid className='img-verify'/>
+                                                                <AiOutlineAndroid className='img-verify' />
                                                                 <p>NATIONAL ID CARD</p>
-                                                                {documentType == 1 && <AiFillCheckCircle className='img-check'/>}
+                                                                {documentType == 1 && <AiFillCheckCircle className='img-check' />}
                                                             </div>
                                                         </Grid>
                                                         <Grid item xs={4} >
                                                             <div className={`verify-type-box ${documentType == 2 ? 'active' : ''}`} onClick={() => setDocumentType(2)}>
-                                                                <AiOutlineAndroid className='img-verify'/>
+                                                                <AiOutlineAndroid className='img-verify' />
                                                                 <p>DRIVER'S LICENSE</p>
-                                                                {documentType == 2 && <AiFillCheckCircle className='img-check'/>}
+                                                                {documentType == 2 && <AiFillCheckCircle className='img-check' />}
                                                             </div>
                                                         </Grid>
                                                     </Grid>
@@ -641,13 +641,13 @@ const KycMain = () => {
                                     </>
                                 }
                                 {
-                                    KYCStep == 2 && 
+                                    KYCStep == 2 &&
                                     <>
                                         <div className="header">
                                             KYC Application
                                         </div>
                                         <div className="content text-center">
-                                            <AiOutlineCheckCircle className='imgApprove'/>
+                                            <AiOutlineCheckCircle className='imgApprove' />
                                             <div className='approve-description'>Your KYC application is approved</div>
                                         </div>
                                     </>
@@ -664,31 +664,31 @@ const KycMain = () => {
                                     <TableContainer>
                                         <Table className="portfolio-table" sx={{ minWidth: 650 }} aria-label="simple table">
                                             <TableHead>
-                                            <TableRow>
-                                                <TableCell>Name</TableCell>
-                                                <TableCell>Type</TableCell>
-                                                <TableCell align="right">Invested</TableCell>
-                                                <TableCell align="right">Current Price</TableCell>
-                                                <TableCell align="right">To Return</TableCell>
-                                                <TableCell align="right">Return in $</TableCell>
-                                            </TableRow>
+                                                <TableRow>
+                                                    <TableCell>Name</TableCell>
+                                                    <TableCell>Type</TableCell>
+                                                    <TableCell align="right">Invested</TableCell>
+                                                    <TableCell align="right">Current Price</TableCell>
+                                                    <TableCell align="right">To Return</TableCell>
+                                                    <TableCell align="right">Return in $</TableCell>
+                                                </TableRow>
                                             </TableHead>
                                             <TableBody>
-                                            {rows.map((row) => (
-                                                <TableRow
-                                                key={row.name}
-                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                                >
-                                                <TableCell component="th" scope="row">
-                                                    {row.name}
-                                                </TableCell>
-                                                <TableCell>{row.type}</TableCell>
-                                                <TableCell align="right">{row.invested}</TableCell>
-                                                <TableCell align="right">{row.current_price}</TableCell>
-                                                <TableCell align="right">{row.to_return}</TableCell>
-                                                <TableCell align="right">{row.return_in_dollar}</TableCell>
-                                                </TableRow>
-                                            ))}
+                                                {rows.map((row) => (
+                                                    <TableRow
+                                                        key={row.name}
+                                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                    >
+                                                        <TableCell component="th" scope="row">
+                                                            {row.name}
+                                                        </TableCell>
+                                                        <TableCell>{row.type}</TableCell>
+                                                        <TableCell align="right">{row.invested}</TableCell>
+                                                        <TableCell align="right">{row.current_price}</TableCell>
+                                                        <TableCell align="right">{row.to_return}</TableCell>
+                                                        <TableCell align="right">{row.return_in_dollar}</TableCell>
+                                                    </TableRow>
+                                                ))}
                                             </TableBody>
                                         </Table>
                                     </TableContainer>
@@ -705,31 +705,31 @@ const KycMain = () => {
                                     <TableContainer>
                                         <Table className="portfolio-table" sx={{ minWidth: 650 }} aria-label="simple table">
                                             <TableHead>
-                                            <TableRow>
-                                                <TableCell>Name</TableCell>
-                                                <TableCell>Token %</TableCell>
-                                                <TableCell align="right">Token Amount</TableCell>
-                                                <TableCell align="right">Total Token # Invested</TableCell>
-                                                <TableCell align="right">Date</TableCell>
-                                                <TableCell align="center">Action</TableCell>
-                                            </TableRow>
+                                                <TableRow>
+                                                    <TableCell>Name</TableCell>
+                                                    <TableCell>Token %</TableCell>
+                                                    <TableCell align="right">Token Amount</TableCell>
+                                                    <TableCell align="right">Total Token # Invested</TableCell>
+                                                    <TableCell align="right">Date</TableCell>
+                                                    <TableCell align="center">Action</TableCell>
+                                                </TableRow>
                                             </TableHead>
                                             <TableBody>
-                                            {rows_vesting.map((row) => (
-                                                <TableRow
-                                                key={row.name}
-                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                                >
-                                                <TableCell component="th" scope="row">
-                                                    {row.name}
-                                                </TableCell>
-                                                <TableCell>{row.tokenP}</TableCell>
-                                                <TableCell align="right">{row.tokenA}</TableCell>
-                                                <TableCell align="right">{row.total_token}</TableCell>
-                                                <TableCell align="right" className="date-cell">{row.date}</TableCell>
-                                                <TableCell align="center">{(row.is_claim) && row.action}</TableCell>
-                                                </TableRow>
-                                            ))}
+                                                {rows_vesting.map((row) => (
+                                                    <TableRow
+                                                        key={row.name}
+                                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                    >
+                                                        <TableCell component="th" scope="row">
+                                                            {row.name}
+                                                        </TableCell>
+                                                        <TableCell>{row.tokenP}</TableCell>
+                                                        <TableCell align="right">{row.tokenA}</TableCell>
+                                                        <TableCell align="right">{row.total_token}</TableCell>
+                                                        <TableCell align="right" className="date-cell">{row.date}</TableCell>
+                                                        <TableCell align="center">{(row.is_claim) && row.action}</TableCell>
+                                                    </TableRow>
+                                                ))}
                                             </TableBody>
                                         </Table>
                                     </TableContainer>

@@ -19,54 +19,53 @@ export default function CountDown({ data }) {
   let current = 0;
   let duration = 0;
   let end = 0;
-  
+
   useEffect(() => {
     getProject();
   }, []);
 
   useEffect(() => {
-    if(typeof window.ethereum !== undefined) {
-        async function contract() {
-          await window.ethereum.enable();
+    if (typeof window.ethereum !== undefined && window.ethereum && project.address) {
+      async function contract() {
+        await window.ethereum.enable();
 
-          const provider = new ethers.providers.Web3Provider(window.ethereum);
-          const signer = provider.getSigner();
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
 
-          const idoContract = new ethers.Contract(project.address, contract_abi, signer);
+        const idoContract = new ethers.Contract(project.address, contract_abi, signer);
+        let now = await idoContract.getBlockTimestamp();
+        current = now.toString();
 
-          let now = await idoContract.getBlockTimestamp();
-          current = now.toString();
+        let _start = await idoContract.startDate();
+        setStart(_start.toString());
 
-          let _start = await idoContract.startDate();
-          setStart(_start.toString());
+        let _end = await idoContract.endDate();
+        setEnd(_end.toString());
+      }
 
-          let _end = await idoContract.endDate();
-          setEnd(_end.toString());
+      contract();
+
+      const timeInterval = setInterval(() => {
+        current = current * 1 + 1;
+
+        const start = current;
+        if (current > startDate) {
+          end = endDate;
+          setStarted(true);
+        } else {
+          end = startDate;
         }
 
-        contract();
+        const diff = end * 1 - start;
+        duration = diff;
 
-        const timeInterval = setInterval(() => {
-          current = current*1 + 1;
+        if (duration > 0) {
+          setOpen(false);
+          countdownTime(duration);
+        }
+      }, 1000);
 
-          const start = current;
-          if(current > startDate) {
-            end = endDate;
-            setStarted(true);
-          } else {
-            end = startDate;
-          }
-          
-          const diff = end*1 - start;
-          duration = diff;
-
-          if(duration > 0) {
-            setOpen(false);
-            countdownTime(duration);
-          }
-        }, 1000);
-    
-        return () => clearInterval(timeInterval);
+      return () => clearInterval(timeInterval);
     }
   }, [project]);
 
@@ -74,11 +73,11 @@ export default function CountDown({ data }) {
     const docRef = doc(db, "ido_projects", data);
 
     getDoc(docRef)
-            .then(response => {
-              const project = response.data();
-              setProject(project);
-            })
-            .catch(error => console.log(error.message));
+      .then(response => {
+        const project = response.data();
+        setProject(project);
+      })
+      .catch(error => console.log(error.message));
   }
 
   const countdownTime = (diff) => {

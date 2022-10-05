@@ -10,7 +10,7 @@ const Launchpad_Single = () => {
   return (
     <>
       <Header />
-      <LaunchpadSingle data={location.state}/>
+      <LaunchpadSingle data={location.state} />
       <Footer />
     </>
   );

@@ -1,4 +1,4 @@
-import React from 'react' 
+import React from 'react'
 import Header from '../Components/Global/Header';
 import KycMain from '../Components/Kyc/Main';
 import Footer from '../Components/Kyc/Footer/Footer';
@@ -6,9 +6,9 @@ import Footer from '../Components/Kyc/Footer/Footer';
 const Kyc = () => {
   return (
     <>
-        <Header/> 
-        <KycMain/>
-        <Footer/>
+      <Header />
+      <KycMain />
+      <Footer />
     </>
   )
 }

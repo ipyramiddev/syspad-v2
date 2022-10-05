@@ -10,7 +10,7 @@ const ResearchAccordion = () => {
     <div className="ResearchAccordion-content">
       <Accordion defaultActiveKey="0" flush>
         {accordion.map(({ id, title, desc }) => (
-          <Accordion.Item eventKey={id}>
+          <Accordion.Item eventKey={id} key={id}>
             <Accordion.Header>{title}</Accordion.Header>
             <Accordion.Body>{desc}</Accordion.Body>
           </Accordion.Item>

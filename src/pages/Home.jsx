@@ -1,4 +1,4 @@
-import React from 'react' 
+import React from 'react'
 import Header from '../Components/Global/Header';
 import Banner from '../Components/Home/Banner/Banner';
 import Counter from '../Components/Home/Counter/Counter';
@@ -10,13 +10,13 @@ import Footer from '../Components/Global/Footer';
 const Home = () => {
   return (
     <>
-        <Header/> 
-        <Banner/>
-        <Counter/>
-        {/* <LaunchingSoon/> */}
-        <LaunchingProjects/>
-        <Research/>
-        <Footer/>
+      <Header />
+      <Banner />
+      <Counter />
+      {/* <LaunchingSoon/> */}
+      <LaunchingProjects />
+      <Research />
+      <Footer />
     </>
   )
 }
