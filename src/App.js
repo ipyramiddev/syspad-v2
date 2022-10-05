@@ -10,6 +10,9 @@ import LaunchpadSingle from './pages/Launchpad_Single';
 import LaunchpadPrivateSale from './pages/Launchpad_PrivateSale';
 import CreateLaunchpad from './pages/CreateLaunchpad';
 import Kyc from './pages/Kyc';
+import Admin from './pages/Admin';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import './App.scss';
 
@@ -26,7 +29,9 @@ function App() {
           <Route path="launchpad_privatesale" element={<LaunchpadPrivateSale />} />
           <Route path="create_launchpad" element={<CreateLaunchpad />} />
           <Route path="kyc" element={<Kyc />} />
+          <Route path="admin" element={<Admin />} />
         </Routes>
+        <ToastContainer />
       </AppContextProvider>
     </BrowserRouter>
   );

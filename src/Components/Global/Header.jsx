@@ -73,7 +73,6 @@ const Header = () => {
             async function getAdmin() {
                 const q = query(adminCollectionRef, where("wallet_address", "==", appContext.user.full_addr))
                 const querySnapshot = await getDocs(q)
-                console.log(querySnapshot.docs.length + 1)
                 if (querySnapshot.docs.length > 0) {
                     appContext.setUser(prevState => ({
                         ...prevState,
@@ -88,7 +87,7 @@ const Header = () => {
             }
             getAdmin();
         }
-    }, [appContext])
+    }, [appContext.user.full_addr])
     return (
         <nav className="navbar topMenu">
             <div className="container">

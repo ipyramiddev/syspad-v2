@@ -11,9 +11,9 @@ const CreateLaunchapd = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (Object.keys(appContext.user).length !== 0 && !appContext.user.isAdmin) {
-      console.log("appContext", appContext.user)
-      navigate("/home");
+    let wallet = localStorage.getItem("setFullAddress");
+    if (!wallet || (Object.keys(appContext.user).length !== 0 && !appContext.user.isAdmin)) {
+      navigate("/home"); return;
     }
   }, [appContext.user.isAdmin])
 
