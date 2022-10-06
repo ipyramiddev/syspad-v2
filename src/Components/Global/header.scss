@@ -75,6 +75,9 @@
     }
 
     .right-head {
+        display: flex;
+        align-items: center;
+        
         a {
             border-radius: 100px;
             background-color: var(--white);
@@ -94,6 +97,7 @@
                 font-size: 27px;
             }
         }
+
     }
 
     .dropdown-list {

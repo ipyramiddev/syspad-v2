@@ -72,7 +72,6 @@ const AdminList = () => {
             data: doc.data(),
             id: doc.id
         }));
-        console.log("admins", res)
         setAdmins(res);
     }
 

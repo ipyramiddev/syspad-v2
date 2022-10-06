@@ -74,5 +74,21 @@
         color: white;
         font-size: 17px;
         line-height: 1.5;
+
+        table, td, th {
+            border: 1px solid #fff;
+            color: #fff;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td, th {
+            text-align: center;
+            width: 17%;
+        }
+        td:first-child, th:first-child {
+            width: 32%;
+        }
     }
 }

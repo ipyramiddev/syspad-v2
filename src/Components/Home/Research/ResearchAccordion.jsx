@@ -12,10 +12,13 @@ const ResearchAccordion = () => {
         {accordion.map(({ id, title, desc }) => (
           <Accordion.Item eventKey={id} key={id}>
             <Accordion.Header>{title}</Accordion.Header>
-            <Accordion.Body>{desc}</Accordion.Body>
+            <Accordion.Body>
+              <span dangerouslySetInnerHTML={{__html: desc}} />
+            </Accordion.Body>
           </Accordion.Item>
         ))}
       </Accordion>
+      
     </div>
   );
 };

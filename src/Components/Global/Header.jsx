@@ -8,6 +8,12 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import socials from "../../assets/data/socials";
 import Logo from "../../assets/img/logo-min.svg";
 import Logo2 from "../../assets/img/logo.png";
+import Avatar from '@mui/material/Avatar';
+import { deepOrange } from '@mui/material/colors';
+
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 import { IoMdClose } from "react-icons/io";
 import {
@@ -28,6 +34,15 @@ import "./header.scss";
 const Header = () => {
     const [connectedAccount, setConnectedAccount] = useState(false);
     const [copyState, setCopyState] = useState(false);
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const adminMenuOpen = Boolean(anchorEl);
+    const handleAdminMenuClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleAdminMenuClose = () => {
+        setAnchorEl(null);
+    };
 
     const appContext = useAppContext()
     let { ethereum } = window;
@@ -114,6 +129,36 @@ const Header = () => {
                             <BiWallet /> Connect Wallet
                         </Link>
                     )}
+                    {
+                        connectedAccount && appContext.user.isAdmin && 
+                        <>
+                            <Button
+                                id="basic-button"
+                                aria-controls={adminMenuOpen ? 'basic-menu' : undefined}
+                                aria-haspopup="true"
+                                aria-expanded={adminMenuOpen ? 'true' : undefined}
+                                onClick={handleAdminMenuClick}
+                            >
+                                <Avatar sx={{ bgcolor: deepOrange[500], width: 55, height: 55, mr: '20px' }}>AD</Avatar>
+                            </Button>
+                            
+                            <Menu
+                                id="basic-menu"
+                                anchorEl={anchorEl}
+                                open={adminMenuOpen}
+                                onClose={handleAdminMenuClose}
+                                MenuListProps={{
+                                'aria-labelledby': 'basic-button',
+                                }}
+                            >
+                                <MenuItem>
+                                    <Link to="/admin" style={{color: '#fff'}}>
+                                        Admin List
+                                    </Link>
+                                </MenuItem>
+                            </Menu>
+                        </>
+                    }
                     {(connectedAccount) && (
                         <CopyToClipboard text={"full_address"} onCopy={() => setCopyState(true)}>
                             <Link to="#">
