@@ -21,6 +21,7 @@ import coinbaseLogo from '../../../assets/img/coinbase.png';
 import syspadImg from '../../../assets/img/syspad-token.png';
 import { AiFillWarning } from "react-icons/ai";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { toast } from 'react-toastify';
 
 import { ethers } from 'ethers';
 import staking_abi from '../../../contracts/Staking_abi.json';
@@ -152,25 +153,67 @@ const Staking = () => {
     };
 
     const depositToken = async () => {
-        setLoading(true);
-        let tx = await contract.stake(ethers.utils.parseEther(depositAmnt.toString()));
-        await tx.wait();
-        setLoading(false);
+        if(depositAmnt <= 0) {
+            toast.error("Please input deposit amount!")
+            return;
+        }
+        try {
+            setLoading(true);
+            let tx = await contract.stake(ethers.utils.parseEther(depositAmnt.toString()));
+            await tx.wait();
+            setLoading(false);
+            toast.success("deposit success")
+        } catch (e) {
+            if(e.reason) {
+                toast.error(e.reason)
+            } else if(e.message) {
+                toast.error(e.message)
+            }
+            setLoading(false);
+        }
     };
 
     const withdrawToken = async () => {
-        setLoading(true);
-        let tx = await contract.withdraw(ethers.utils.parseEther(withdrawAmnt.toString()));
-        await tx.wait();
-        setLoading(false);
+        if(withdrawAmnt <= 0) {
+            toast.error("Please input withdraw amount!")
+            return;
+        }
+        try {
+            setLoading(true);
+            let tx = await contract.withdraw(ethers.utils.parseEther(withdrawAmnt.toString()));
+            await tx.wait();
+            setLoading(false);
+            toast.success("withdraw success")
+        } catch (e) {
+            if(e.reason) {
+                toast.error(e.reason)
+            } else if(e.message) {
+                toast.error(e.message)
+            }
+            setLoading(false);
+        }
     };
 
     const approveToken = async () => {
-        setLoading(true);
-        let tx = await t_contract.approve(staking_contract, ethers.utils.parseEther(depositAmnt.toString()));
-        await tx.wait();
-        setTokenApprove(true);
-        setLoading(false);
+        if(depositAmnt <= 0) {
+            toast.error("Please input deposit amount!")
+            return;
+        }
+        try {
+            setLoading(true);
+            let tx = await t_contract.approve(staking_contract, ethers.utils.parseEther(depositAmnt.toString()));
+            await tx.wait();
+            setTokenApprove(true);
+            setLoading(false);
+            toast.success("deposit success")
+        } catch (e) {
+            if(e.reason) {
+                toast.error(e.reason)
+            } else if(e.message) {
+                toast.error(e.message)
+            }
+            setLoading(false);
+        }
     };
 
     return (
@@ -358,6 +401,11 @@ const Staking = () => {
                                             onClick={depositToken}
                                             disabled={isLoading}
                                         >
+                                            {(isLoading) && (
+                                                <CircularProgress
+                                                    size={24} color="inherit"
+                                                />
+                                            )}
                                             Staking & Lock
                                         </Button>    
                                     )}
@@ -367,15 +415,15 @@ const Staking = () => {
                                             onClick={approveToken}
                                             disabled={isLoading}
                                         >
+                                            {(isLoading) && (
+                                                <CircularProgress
+                                                    size={24} color="inherit"
+                                                />
+                                            )}
                                             Authorize Wallet
                                         </Button>    
                                     )}
-                                    {(isLoading) && (
-                                        <CircularProgress
-                                            size={24}
-                                            className="button-progress"
-                                        />
-                                    )}
+                                    
                                     </div>
 
                                     <div className="text-center text-muted-v2 font-14 mt-20">
@@ -410,14 +458,13 @@ const Staking = () => {
                                             onClick={withdrawToken}
                                             disabled={isLoading}
                                         >
+                                            {(isLoading) && (
+                                                <CircularProgress
+                                                    size={24} color="inherit"
+                                                />
+                                            )}
                                             Withdraw
-                                        </Button>    
-                                    {(isLoading) && (
-                                        <CircularProgress
-                                            size={24}
-                                            className="button-progress"
-                                        />
-                                    )}
+                                        </Button>
                                     </div>
 
                                     <div className="text-center text-muted-v2 font-14 mt-20">
