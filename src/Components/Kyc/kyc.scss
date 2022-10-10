@@ -1,22 +1,48 @@
 .kyc-area {
+    margin: 0 !important;
+    padding: 0 !important;
     .kyc-tab-content {
-        border: 1px solid #1d3b94;
+        border: 1px solid #4d70d8;
+        border-right: 2px solid #4d70d8;
+        border-bottom: 1.5px solid #4d70d8;
         border-radius: 10px;
         margin-top: 40px;
         background-color: #090e4e !important;
         padding: 50px;
     }
+.kyc-tab-wraper{
+    position: static;
+    background-color: #090e4e !important;
+    padding-left: 100px;
+}
 
+.kyc-tab {
+    font-size: 25px;
+    text-transform: unset !important;
+    padding: 20px;
+}
+
+.kyc-tab.Mui-selected {
+    font-weight: bold;
+    color: rgb(253, 246, 246) !important;
+}
+.custom-container{
+    margin:0 55px;
+}
+@media only screen and (max-width:750px){
+    .custom-container{
+        margin:0 20px;
+    }
+    .kyc-tab-wraper{
+        padding-left: 10px;
+    }
     .kyc-tab {
-        font-size: 28px;
+        font-size: 20px;
         text-transform: unset !important;
-        padding: 30px;
+        padding: 20px;
     }
+}
 
-    .kyc-tab.Mui-selected {
-        font-weight: bold;
-        color: white !important;
-    }
 
     .css-hip9hq-MuiPaper-root-MuiAppBar-root {
         box-shadow: unset !important;
@@ -86,7 +112,7 @@
                 text-align: center;
                 letter-spacing: -0.019em;
 
-                color: #FFFFFF;
+                color: #FFF;
             }
 
             .imgApprove {
@@ -102,7 +128,7 @@
 
             .stepbox {
                 border-top: 1px solid #e6effb;
-                padding: 2rem;
+                // padding: 2rem;
             }
 
             .step-header {
@@ -207,11 +233,7 @@
                     }
                     .upload-container {
                         display: flex;
-                        .upload-img {
-                            width: 60%;
-                        }
                         .sample-img {
-                            margin-left: 50px;
                             img {
                                 height: 250px;
                             }
@@ -253,7 +275,7 @@
         }
 
         .portfolio-table th, .portfolio-table td {
-            font-size: 22px !important;
+            font-size: 20px !important;
         }
 
         .portfolio-table thead th {
@@ -273,6 +295,27 @@
         .portfolio-table tbody th, .portfolio-table tbody .date-cell {
             width: 300px !important;
         }
+    }
+}
+//--------------------------- media query
+@media only screen and (max-width:792px) {
+    .step-header{
+        flex-direction: column;
+    }
+    .upload-container{
+        flex-direction:column-reverse;
+        align-items: center;
+        justify-content: center;
+    }
+    .sample-img{
+        margin-bottom: 20px;
+    }
+    .sample-img img{
+        max-width: 200px !important;
+        max-height: 200px !important;
+    }
+    .p2rem-nobottom{
+        padding: 0 !important;
     }
 }
 

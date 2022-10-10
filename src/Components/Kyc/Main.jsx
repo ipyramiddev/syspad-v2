@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { DropzoneArea } from 'material-ui-dropzone';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 import { useTheme } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Tabs from '@mui/material/Tabs';
@@ -320,8 +320,9 @@ const KycMain = () => {
     return (
         <div className="kyc-area">
             <Box className="kyc-box">
-                <AppBar position="static">
+                <AppBar className='kyc-tab-wraper'>
                     <Tabs
+                        className='kycTab'
                         value={value}
                         onChange={handleChange}
                         textColor="inherit"
@@ -332,7 +333,7 @@ const KycMain = () => {
                         <Tab className="kyc-tab text-muted-v2" label="Upcoming Vesting" {...a11yProps(2)} />
                     </Tabs>
                 </AppBar>
-                <div className="container">
+                <div className="custom-container">
                     <SwipeableViews
                         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                         index={value}
@@ -352,7 +353,7 @@ const KycMain = () => {
                         <TabPanel className="kyc-tab-content" value={value} index={0} dir={theme.direction}>
                             <div className="kyc-application text-white">
                                 {
-                                    KYCStep == 0 &&
+                                    KYCStep === 0 &&
                                     <>
                                         <div className="header">
                                             KYC Application
@@ -366,21 +367,21 @@ const KycMain = () => {
                                     </>
                                 }
                                 {
-                                    KYCStep == 1 &&
+                                    KYCStep === 1 &&
                                     <>
                                         <div className="header">
                                             Begin your ID-Verification
                                         </div>
                                         <div className="content text-center p2rem-nobottom">
-                                            <div className='stepbox step-header'>
+                                            <div className='stepbox step-header py-3 p-md-5'>
                                                 <div className='step-circle'>01</div>
                                                 <div className='step-title'>
                                                     <p className='title1'>Personal Details</p>
                                                     <p>Your basic personal information is required for identification purposes.</p>
                                                 </div>
                                             </div>
-                                            <div className='stepbox step-content'>
-                                                <div className='step-info'>
+                                            <div className='stepbox step-content p-md-5'>
+                                                <div className='step-info py-3 p-md-5'>
                                                     <AiFillInfoCircle />
                                                     <p>Please type carefully and fill out the form with your personal details. You are not allowed to edit the details once you have submitted the application.</p>
                                                 </div>
@@ -390,28 +391,39 @@ const KycMain = () => {
                                                         noValidate
                                                         autoComplete="off"
                                                     >
-                                                        <div>
+                                                        <Row className=''>
+                                                            <Col className='col-12 col-md-6'>
                                                             <CustomTextField
+                                                                className='w-100'
                                                                 required
                                                                 id="standard-required"
                                                                 label="First Name"
                                                                 defaultValue=""
                                                                 variant="standard"
-                                                            />
+                                                            /></Col>
+
+                                                            <Col className='col-12 col-md-6' >
                                                             <CustomTextField
+                                                             className='w-100'
                                                                 required
                                                                 id="standard-required"
                                                                 label="Last Name"
                                                                 defaultValue=""
                                                                 variant="standard"
-                                                            />
+                                                            /></Col>
+
+                                                            <Col className='col-12 col-md-6'>
                                                             <CustomTextField
+                                                             className='w-100'
                                                                 id="standard-helperText"
                                                                 label="Date of Birth"
                                                                 defaultValue=""
                                                                 variant="standard"
-                                                            />
+                                                            /></Col>
+
+                                                            <Col className='col-12 col-md-6'>
                                                             <CustomSelectField
+                                                             className='w-100'
                                                                 required
                                                                 id="standard-select-currency"
                                                                 select
@@ -421,17 +433,22 @@ const KycMain = () => {
                                                             >
                                                                 <MenuItem value={"M"}>{"Male"}</MenuItem>
                                                                 <MenuItem value={"F"}>{"Female"}</MenuItem>
-                                                            </CustomSelectField>
+                                                            </CustomSelectField></Col>
+
+                                                            <Col className='col-12 col-md-6'>
                                                             <CustomTextField
+                                                             className='w-100'
                                                                 id="standard-required"
                                                                 label="Telegram Username"
                                                                 defaultValue=""
                                                                 variant="standard"
-                                                            />
-                                                        </div>
+                                                            /></Col>
+                                                        </Row>
                                                         <div className="txtAddress">Your Address</div>
-                                                        <div>
+                                                        <Row>
+                                                        <Col className='col-12 col-md-6'>
                                                             <CustomSelectField
+                                                             className='w-100'
                                                                 required
                                                                 id="standard-select-currency"
                                                                 select
@@ -442,58 +459,68 @@ const KycMain = () => {
                                                                 <MenuItem value={"US"}>{"United States of America"}</MenuItem>
                                                                 <MenuItem value={"UA"}>{"Ukraine"}</MenuItem>
                                                                 <MenuItem value={"IR"}>{"Ireland"}</MenuItem>
-                                                            </CustomSelectField>
+                                                            </CustomSelectField></Col>
+                                                            <Col className='col-12 col-md-6'>
                                                             <CustomTextField
+                                                             className='w-100'
                                                                 required
                                                                 id="standard-required"
                                                                 label="State"
                                                                 defaultValue=""
                                                                 variant="standard"
-                                                            />
+                                                            /></Col>
+                                                              <Col className='col-12 col-md-6'>
                                                             <CustomTextField
+                                                             className='w-100'
                                                                 required
                                                                 id="standard-helperText"
                                                                 label="City"
                                                                 defaultValue=""
                                                                 variant="standard"
-                                                            />
+                                                            /></Col>
+                                                              <Col className='col-12 col-md-6'>
                                                             <CustomTextField
+                                                             className='w-100'
                                                                 required
                                                                 id="standard-required"
                                                                 label="Zip / Postal Code"
                                                                 defaultValue=""
                                                                 variant="standard"
-                                                            />
+                                                            /></Col>
+                                                              <Col className='col-12 col-md-6'>
                                                             <CustomTextField
+                                                             className='w-100'
                                                                 required
                                                                 id="standard-required"
                                                                 label="Address Line1"
                                                                 defaultValue=""
                                                                 variant="standard"
-                                                            />
+                                                            /></Col>
+                                                              <Col className='col-12 col-md-6'>
                                                             <CustomTextField
+                                                             className='w-100'
                                                                 required
                                                                 id="standard-required"
                                                                 label="Address Line2"
                                                                 defaultValue=""
                                                                 variant="standard"
-                                                            />
-                                                        </div>
+                                                            /></Col>
+                                                        </Row>
                                                     </Box>
                                                 </div>
                                             </div>
 
-                                            <div className='stepbox step-header'>
+                                            <div className='stepbox step-header py-3 p-md-5'>
                                                 <div className='step-circle'>02</div>
                                                 <div className='step-title'>
                                                     <p className='title1'>Document Upload</p>
                                                     <p>To verify your identity, we ask you to upload high-quality scans or photos of your official identification documents issued by the government.</p>
                                                 </div>
                                             </div>
-                                            <div className='stepbox step-content'>
+                                            <div className='stepbox step-content py-3 p-md-5'>
                                                 <div className='step-info'>
                                                     <AiFillInfoCircle />
-                                                    <p>In order to complete, please upload any of the following personal documents.</p>
+                                                    <p >In order to complete, please upload any of the following personal documents.</p>
                                                 </div>
                                                 <div className='step2'>
                                                     <Grid
@@ -503,25 +530,25 @@ const KycMain = () => {
                                                         alignItems="center"
                                                         marginTop="30px"
                                                     >
-                                                        <Grid item xs={4} >
-                                                            <div className={`verify-type-box ${documentType == 0 ? 'active' : ''}`} onClick={() => setDocumentType(0)}>
+                                                        <Grid item xs={12} md={4} className='my-2'>
+                                                            <div className={`verify-type-box ${documentType === 0 ? 'active' : ''}`} onClick={() => setDocumentType(0)}>
                                                                 <AiOutlineAndroid className='img-verify' />
                                                                 <p>PASSPORT</p>
-                                                                {documentType == 0 && <AiFillCheckCircle className='img-check' />}
+                                                                {documentType === 0 && <AiFillCheckCircle className='img-check' />}
                                                             </div>
                                                         </Grid>
-                                                        <Grid item xs={4} >
-                                                            <div className={`verify-type-box ${documentType == 1 ? 'active' : ''}`} onClick={() => setDocumentType(1)}>
+                                                        <Grid item xs={12} md={4} className='my-2'>
+                                                            <div className={`verify-type-box ${documentType === 1 ? 'active' : ''}`} onClick={() => setDocumentType(1)}>
                                                                 <AiOutlineAndroid className='img-verify' />
                                                                 <p>NATIONAL ID CARD</p>
-                                                                {documentType == 1 && <AiFillCheckCircle className='img-check' />}
+                                                                {documentType === 1 && <AiFillCheckCircle className='img-check' />}
                                                             </div>
                                                         </Grid>
-                                                        <Grid item xs={4} >
-                                                            <div className={`verify-type-box ${documentType == 2 ? 'active' : ''}`} onClick={() => setDocumentType(2)}>
+                                                        <Grid item xs={12} md={4}  className='my-2'>
+                                                            <div className={`verify-type-box ${documentType === 2 ? 'active' : ''}`} onClick={() => setDocumentType(2)}>
                                                                 <AiOutlineAndroid className='img-verify' />
                                                                 <p>DRIVER'S LICENSE</p>
-                                                                {documentType == 2 && <AiFillCheckCircle className='img-check' />}
+                                                                {documentType === 2 && <AiFillCheckCircle className='img-check' />}
                                                             </div>
                                                         </Grid>
                                                     </Grid>
@@ -562,8 +589,8 @@ const KycMain = () => {
                                                                 filesLimit={1}
                                                             />
                                                         </div>
-                                                        <div className='sample-img'>
-                                                            <img src={Verify1} alt="image" />
+                                                        <div className='sample-img ms-md-5'>
+                                                            <img className='img-fluid' src={Verify1} alt="img"  />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -580,22 +607,22 @@ const KycMain = () => {
                                                                 filesLimit={1}
                                                             />
                                                         </div>
-                                                        <div className='sample-img'>
-                                                            <img src={Verify2} alt="image" />
+                                                        <div className='sample-img ms-md-5'>
+                                                            <img className='img-fluid'  src={Verify2} alt="imag" />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div className='stepbox step-header'>
+                                            <div className='stepbox step-header p-3 p-md-5'>
                                                 <div className='step-circle'>03</div>
                                                 <div className='step-title'>
                                                     <p className='title1'>Your Paying Wallet</p>
                                                     <p>Submit your wallet address that you are going to send funds.</p>
                                                 </div>
                                             </div>
-                                            <div className='stepbox step-content'>
-                                                <div className='step-info'>
+                                            <div className='stepbox step-content p-3 p-md-5'>
+                                                <div className='step-info '>
                                                     <AiFillInfoCircle />
                                                     <p>DO NOT USE your exchange wallet address such as Kraken, Bitfinex, Bithumb, Binance etc.</p>
                                                 </div>
@@ -624,7 +651,7 @@ const KycMain = () => {
                                                 </div>
                                             </div>
 
-                                            <div className='stepbox step-content'>
+                                            <div className='stepbox step-content p-3 p-md-5'>
                                                 <div className='step4'>
                                                     <FormGroup>
                                                         <CustomFormControlLabel control={<CustomCheckbox />} label={<p>I have read the Terms and Condition and Privacy and Policy.</p>} />
@@ -655,22 +682,22 @@ const KycMain = () => {
                             </div>
                         </TabPanel>
                         <TabPanel className="kyc-tab-content" value={value} index={1} dir={theme.direction}>
-                            <div className="kyc-portfolio text-white">
+                            <div className="kyc-portfolio text-white ">
                                 <div className="header">
                                     Portfolio
                                 </div>
                                 <div className="sub-title">Projects invested in and launched on SYSPAD</div>
                                 <div className="content">
                                     <TableContainer>
-                                        <Table className="portfolio-table" sx={{ minWidth: 650 }} aria-label="simple table">
+                                        <Table className="portfolio-table " sx={{ minWidth: 650 }} aria-label="simple table">
                                             <TableHead>
                                                 <TableRow>
-                                                    <TableCell>Name</TableCell>
-                                                    <TableCell>Type</TableCell>
-                                                    <TableCell align="right">Invested</TableCell>
-                                                    <TableCell align="right">Current Price</TableCell>
-                                                    <TableCell align="right">To Return</TableCell>
-                                                    <TableCell align="right">Return in $</TableCell>
+                                                    <TableCell align="left">Name</TableCell>
+                                                    <TableCell align="left">Type</TableCell>
+                                                    <TableCell align="left">Invested</TableCell>
+                                                    <TableCell align="left">Current Price</TableCell>
+                                                    <TableCell align="left">To Return</TableCell>
+                                                    <TableCell align="left">Return in $</TableCell>
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
@@ -679,14 +706,12 @@ const KycMain = () => {
                                                         key={row.name}
                                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                                     >
-                                                        <TableCell component="th" scope="row">
-                                                            {row.name}
-                                                        </TableCell>
+                                                        <TableCell component="th"  scope="row"> {row.name}</TableCell>
                                                         <TableCell>{row.type}</TableCell>
-                                                        <TableCell align="right">{row.invested}</TableCell>
-                                                        <TableCell align="right">{row.current_price}</TableCell>
-                                                        <TableCell align="right">{row.to_return}</TableCell>
-                                                        <TableCell align="right">{row.return_in_dollar}</TableCell>
+                                                        <TableCell align="left">{row.invested}</TableCell>
+                                                        <TableCell align="left">{row.current_price}</TableCell>
+                                                        <TableCell align="left">{row.to_return}</TableCell>
+                                                        <TableCell align="left">{row.return_in_dollar}</TableCell>
                                                     </TableRow>
                                                 ))}
                                             </TableBody>

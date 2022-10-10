@@ -12,6 +12,13 @@ const Splash = () => {
           <img src={Logo} alt="logo" />
           <div className="enter-btn">
             <Link to="/home">Enter App</Link>
+              <ul className="enter-social-mobile">
+                {socials.map(({ id, links, icon }) => (
+                 <li key={id}>
+                    <a href={links}>{icon}</a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
         <ul className="enter-social">

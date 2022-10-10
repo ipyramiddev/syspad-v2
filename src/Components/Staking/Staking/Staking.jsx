@@ -220,7 +220,7 @@ const Staking = () => {
         <div className="staking-area">
             <div className="container">
                 {!(myStaked > 0) && (
-                    <div className="alert row">
+                    <div className="alert row ms-2">
                         <div className="col-md-1 stake-warning-icon text-center">
                             <span className="warning-icon">
                                 <AiFillWarning/>
@@ -228,7 +228,7 @@ const Staking = () => {
                         </div>
                         <div className="col-md-7">
                             <span className="text-white font-20">Looks like your wallet doesn't have SYSPAD staked to participate in launches.</span>
-                            <p className="sub-text text-muted-v2 font-12">Stake at least 10 SYSPAD to participate in launches and invest in the future of SYSCOIN and web3</p>
+                            <p className="sub-text text-muted-v2 font-12 py-2">Stake at least 10 SYSPAD to participate in launches and invest in the future of SYSCOIN and web3</p>
                         </div>
                         <div className="col-md-4 text-right externelTokenBuy">
                             <div>

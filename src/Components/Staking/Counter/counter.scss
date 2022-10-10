@@ -3,7 +3,9 @@
         padding-right: calc(var(--bs-gutter-x)) !important;
         padding-left: calc(var(--bs-gutter-x)) !important;
     }
-
+    .counter-item {
+        margin-top: 20px;
+    }
     .counter-item > div {
         overflow: hidden;
         text-overflow: ellipsis;

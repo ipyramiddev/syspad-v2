@@ -40,3 +40,23 @@
         font-size: 40px;
     }
 }
+.enter-social-mobile{
+    display: none;
+}
+@media only screen and (max-width:798px)  {
+    .enter-social{
+        display: none;
+    }
+    .enter-social-mobile{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        li a{
+            width: 40px;
+            height: 40px;
+            margin-top: 40px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
+}

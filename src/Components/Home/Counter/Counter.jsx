@@ -12,8 +12,8 @@ const Counter = () => {
             <div className="row">
                 {counter.map(({ id, number, text }) => ( 
                     <div className="col-lg-3 col-md-6" key={id}>
-                        <div className="counter-item text-center">
-                            <div className="h2 text-white">{number}</div>
+                        <div className="counter-item text-center mt-3">
+                            <div className="fs-1 fw-bolder text-white">{number}</div>
                             <span className="text-white">{text}</span>
                         </div>
                     </div>

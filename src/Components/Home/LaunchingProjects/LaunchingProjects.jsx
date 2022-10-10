@@ -64,7 +64,7 @@ const LaunchingProjects = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="section-title">
-                            <div className="h2 text-white">Launched Projects</div>
+                            <div className="h2 text-white text-center text-md-start">Launched Projects</div>
                         </div>
                     </div>
                 </div>
@@ -101,7 +101,7 @@ const LaunchingProjects = () => {
                                 <img src={pImg} alt="images" />
                             </Link>
                             <div className="projects-text">
-                                <img src={pIconImg} alt="image" />
+                                <img src={pIconImg} alt="photos" />
                                 <div className="h4 text-white pt-3 pb-2">SYSPAD Private Sale</div>
                                 <span>SYSPAD</span>
                                 <p>Private sale for SYSPAD Token</p>
@@ -109,6 +109,7 @@ const LaunchingProjects = () => {
                                     {/* <CountDown data={timeData}></CountDown> */}
                                     <li><span>Fundraise Goal</span> <span>{totalSale} SYS</span></li>
                                     <li><span>Max Allocation </span> <span>{totalSale} SYS</span></li>
+                                    <li><span></span> <span> <br/></span></li>
                                 </ul>
                             </div>
                             <div className="projects-btn">
