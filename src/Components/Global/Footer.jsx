@@ -1,4 +1,5 @@
 import React from 'react';
+import { Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ScrollToTop from 'react-scroll-up-to-top';
 import socials from "../../assets/data/socials";
@@ -11,18 +12,20 @@ const Footer = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12">
-                        <div className="footer-content">
-                            <Link to="/home">
+                        <Row className="footer-content m-0">
+                           <Col className='col-sm-12 d-flex align-center'>
+                           <Link to="/home">
                                 <img src={logo} alt="logo" />
                             </Link>
-                            <ul className="footer-social">
+                           </Col>
+                            <Col className="footer-social pe-2">
                                 {socials.map(({ id, links, icon, text }) => (
-                                    <li key={id}>
-                                        <a href={links}>{icon} {text}</a>
-                                    </li>
+                                    <div className='social-links' key={id}>
+                                        <a href={links}>{icon}{text}</a>
+                                    </div>
                                 ))}
-                            </ul>
-                        </div>
+                            </Col>
+                        </Row>
                     </div>
                 </div>
             </div>

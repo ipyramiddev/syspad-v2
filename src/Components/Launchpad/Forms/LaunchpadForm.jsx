@@ -35,27 +35,29 @@ export default function LaunchpadForm(props) {
           />
         </Grid>
         <Grid item xs={12} md={6}>
+
+          <small className='text-white'>{startDate.label}</small>
           <DatePickerField
             name={startDate.name}
-            label={startDate.label}
             format="yy/MM/DD"
-            views={['year', 'month', 'day']}
+            // views={['year', 'month', 'day']}
             minDate={new Date()}
             maxDate={new Date('2050/12/31')}
             fullWidth
           />
         </Grid>
         <Grid item xs={12} md={6}>
+        <small className='text-white'>{endDate.label}</small>
           <DatePickerField
             name={endDate.name}
-            label={endDate.label}
             format="yy/MM/DD"
-            views={['year', 'month', 'day']}
+            // views={['year', 'month', 'day']}
             minDate={new Date()}
             maxDate={new Date('2050/12/31')}
             fullWidth
           />
         </Grid>
+
         {/* <Grid item xs={12}>
           <CheckboxField
             className="text-white"

@@ -15,6 +15,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import './App.scss';
+// import Accounts from './Components/Kyc/Accounts/Accounts';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="launchpad_privatesale" element={<LaunchpadPrivateSale />} />
           <Route path="create_launchpad" element={<CreateLaunchpad />} />
           <Route path="kyc" element={<Kyc />} />
+          {/* <Route path="accounts" element={<Accounts />} /> */}
           <Route path="admin" element={<Admin />} />
         </Routes>
         <ToastContainer />

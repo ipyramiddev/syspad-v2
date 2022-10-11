@@ -105,7 +105,7 @@ const Header = () => {
     }, [appContext.user.full_addr])
     return (
         <nav className="navbar topMenu">
-            <div className="container">
+            <div className="container topBar">
                 <div className="left-head">
                     <button
                         className="navbar-toggler"
@@ -228,6 +228,9 @@ const Header = () => {
                                     className="dropdown-menu show"
                                     aria-labelledby="offcanvasNavbarDropdown2"
                                 >
+                                    {/* <li className="dropdown-list">
+                                        <Link to="/accounts">Accounts</Link>
+                                    </li> */}
                                     <li className="dropdown-list">
                                         <Link to="/kyc">KYC & Audit</Link>
                                     </li>

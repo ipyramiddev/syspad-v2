@@ -6,7 +6,7 @@
     .footer-social{
         display: flex;
         gap: 30px;
-        li{
+        div{
             a{
                 text-transform: uppercase;
                 font-size: 16px;
@@ -37,5 +37,18 @@ button.styles_scroll-to-top__2A70v {
     }
     svg{
         display: none;
+    }
+}
+
+@media only screen and (max-width:798px) {
+    .footer-content{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .footer-social{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
     }
 }

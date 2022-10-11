@@ -1,0 +1,213 @@
+.dashboard-main {
+    background-color: #03062f;
+}
+
+.new-hr-tag {
+    width: 100%;
+    margin-top: 0px;
+    border: .5px solid white;
+    background-color: white;
+    margin-top: 1px;
+
+}
+
+.frist-box {
+    min-height: 235px;
+    border-radius: 16px;
+    margin-top: 30px;
+    background-image: linear-gradient(#014ce9,#0707d7 70%);
+    text-align: left;
+
+}
+.roy-token-img{
+    width: 70px !important;
+    height: 70px !important;
+}
+
+.tokenBalance {
+    display: flex;
+}
+
+.tokenBalance h2 {
+    font-weight: 400 !important;
+    font-size: 20px !important;
+
+}
+
+.tokenBalance h3 {
+    font-weight: bolder;
+}
+
+.usd-eth-btc h3 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.tokenBalance img {
+    width: 60px;
+}
+.img-two{
+    height: 55px;
+    width: 55px;
+    background-color: #E3F2F5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.img-two img {
+    width: 100%;
+    /* padding: 10px; */
+    /* border-radius: 50; */
+    
+}
+
+
+.token-text {
+    margin-left: 8%;
+}
+
+.token-text h3 {
+    color: black;
+    font-weight: bolder;
+}
+
+.second-box {
+    min-height: 235px;
+    background-color:#0f134f;
+    padding: 20px;
+    border-radius: 16px;
+    margin-top: 30px;
+
+    text-align: left;
+}
+
+.two-button-style {
+    display: flex;
+
+}
+
+.tokenBalance h2 {
+    font-weight: 300;
+    font-size: 30px;
+    color: black;
+}
+
+.tokenBalance .textSys {
+    font-weight: bolder;
+    color: #5f57fd;
+}
+
+.second-box button {
+    background-color:#09bb7f;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px 5px 10px;
+}
+
+.second-hr-tag {
+    width: 100%;
+    border: 1px solid #1989E8;
+    background-color: #1989E8;
+}
+
+.Button-bottom-style button {
+    background-image: linear-gradient(#014ce9,#1616cf);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: end;
+}
+
+.thrid-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    background-color: #063eb8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.thrid-grid {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.syspad-text-img{
+    background-color:#0f134f;
+    display: flex;
+    border-radius: 16px;
+    min-height: 450px;
+    margin-top: 10px;
+}
+.syspadImg{
+    width: 80%;
+}
+.sys-img{
+    max-width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.syspad-text-img h1 {
+    font-size: 38px;
+    font-weight: bold;
+}
+.syspad-text-img button {
+    background-color: #63A9E5;
+    color: white;
+    border: none;
+    border-radius: 16px;
+    padding: 2px 10px 2px 10px;
+}
+.scrollBar{
+    width: 95%;
+    margin-top: 15px;
+    margin-bottom: -15px;
+}
+
+
+/* text/// */
+.small-text{
+    font-size: 16px;
+    letter-spacing: 2px;
+    font-weight: 100 !important;
+}
+.smaller-text{
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: 300;
+}
+
+
+/* second part desing  */
+.interestOnSyspad {
+    background-color:#0f134f;
+    border-radius: 16px;
+    min-height: 450px;
+    margin-top: 10px;
+}
+
+
+@media only screen and (max-width:768px) {
+    .syspad-text-img{
+       flex-direction: column;
+       margin-top: 15px;
+    }
+    .syspadImg{
+        width: 80%;
+    }
+    .sys-img{
+        max-width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

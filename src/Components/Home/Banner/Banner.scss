@@ -1,9 +1,83 @@
 
 .banner-area{
-    padding: 120px 0 180px;
+    padding: 120px 0 200px;
 }
 .banner-text{
     .h3{
         font-weight: 500;
+    }
+}
+.homeBaner-btn{
+    display: flex;
+}
+@media only screen and (max-width:768px) {
+    .homeBaner-btn{
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+    .banner-text{
+        position: relative;
+        margin-top: -50px;
+        .h1{
+            font-size: 60px;
+        }
+    }
+}
+
+.banner-img{
+    position: relative;
+}
+.banner-img img{
+    position: absolute;
+    width: 95%;
+    animation-name: buildingMoved;
+    animation-direction: alternate-reverse;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function: ease-in-out;
+  
+    animation-fill-mode: both;
+  }
+  @keyframes buildingMoved {
+    0% {
+      margin-top: -50px;
+    }
+    20% {
+      
+    }
+    40% {
+      
+    }
+    50% {
+      margin-top: 0;
+    }
+    60% {
+        margin-bottom: -7px;
+    }
+    80% {
+        margin-bottom: -14px;
+    }
+    100% {
+      margin-bottom: -20px;
+    }
+  }
+
+  @media only screen and (max-width:992px) {
+    .banner-img{
+        padding-bottom: 650px;
+        padding-top: 60px;
+    }
+}
+@media only screen and (max-width:768px) {
+    .banner-img{
+        padding-bottom: 400px;
+        padding-top: 50px;
+    }
+}
+@media only screen and (max-width:450px) {
+    .banner-img{
+        padding-bottom: 300px;
     }
 }
