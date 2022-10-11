@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import socials from "../../assets/data/socials";
 import Logo from "../../assets/img/logo-min.svg";
+import { ReactComponent as CopyIcon } from "../../assets/img/copy.svg";
+import { ReactComponent as DisconnectIcon } from "../../assets/img/disconnect.svg";
 import Logo2 from "../../assets/img/logo.png";
 import Avatar from '@mui/material/Avatar';
 import { deepOrange } from '@mui/material/colors';
@@ -29,6 +31,7 @@ import { query, where, getDocs } from 'firebase/firestore';
 import { adminCollectionRef } from '../../lib/firebase.collections'
 
 import { useAppContext } from '../../context/AppContext'
+import { toast } from 'react-toastify';
 
 import "./header.scss";
 const Header = () => {
@@ -66,11 +69,12 @@ const Header = () => {
         localStorage.setItem('setFullAddress', wallet);
     }
 
-    // function _disconnectWallet() {
-    //     localStorage.removeItem("setAddress");
-    //     localStorage.removeItem("setFullAddress");
-    //     setConnectedAccount(false);
-    // }
+    const disconnectWallet = () => {
+        localStorage.removeItem("setAddress");
+        localStorage.removeItem("setFullAddress");
+        appContext.setUser({})
+        setConnectedAccount(false);
+    }
     useEffect(() => {
         let wallet = localStorage.getItem("setFullAddress");
         if (wallet) {
@@ -125,9 +129,9 @@ const Header = () => {
                 </div>
                 <div className="right-head">
                     {!(connectedAccount) && (
-                        <Link to="#" onClick={_connectMetamask}>
+                        <button onClick={_connectMetamask} className="walletBtn">
                             <BiWallet /> Connect Wallet
-                        </Link>
+                        </button>
                     )}
                     {
                         connectedAccount && appContext.user.isAdmin && 
@@ -160,14 +164,13 @@ const Header = () => {
                         </>
                     }
                     {(connectedAccount) && (
-                        <CopyToClipboard text={"full_address"} onCopy={() => setCopyState(true)}>
-                            <Link to="#">
-                                <BiWallet /> {connectedAccount}
-                            </Link>
-                        </CopyToClipboard>
-                        // <Link to="#" onClick={_disconnectWallet}>
-                        //     <BiWallet /> {connectedAccount}
-                        // </Link>
+                        <button className="walletBtn">
+                            <BiWallet /> {connectedAccount}
+                            <CopyToClipboard text={appContext.user.full_addr} onCopy={() => {setCopyState(true);toast.success(`copied! ${appContext.user.full_addr}`)}}>
+                                <CopyIcon className="icons" />
+                            </CopyToClipboard>
+                            <DisconnectIcon className="icons" onClick={disconnectWallet} />
+                        </button>
                     )}
                 </div>
                 <div
