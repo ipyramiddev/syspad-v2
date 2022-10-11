@@ -1,58 +1,59 @@
-import React, { useState, useEffect }from 'react';
-import { useFormikContext } from 'formik';
-import { Grid, Typography, List, ListItem, ListItemText } from '@material-ui/core';
-import { InputField, SelectField, HiddenField } from '../FormFields';
-import Web3Modal from 'web3modal';
-import { ethers } from 'ethers';
-import abi from '../../../contracts/Token_abi.json';
-import useStyles from './styles';
+import React, { useState, useEffect } from "react";
+import { useFormikContext } from "formik";
+import {
+  Grid,
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+} from "@material-ui/core";
+import { InputField, SelectField, HiddenField } from "../FormFields";
+import Web3Modal from "web3modal";
+import { ethers } from "ethers";
+import abi from "../../../contracts/Token_abi.json";
+import useStyles from "./styles";
+import { toast } from "react-toastify";
 
 const networks = [
   {
-    value: '1',
-    label: 'SYSCOIN'
+    value: "1",
+    label: "SYSCOIN",
   },
 ];
 
 export default function TokenForm(props) {
   let { ethereum } = window;
   let contract = null;
-  const [t_name, setTokenName] = useState('');
-  const [t_symbol, setTokenSymbol] = useState('');
-  const [t_decimals, setTokenDecimals] = useState('');
+  const [t_name, setTokenName] = useState("");
+  const [t_symbol, setTokenSymbol] = useState("");
+  const [t_decimals, setTokenDecimals] = useState("");
 
   const {
-    formField: {
-      tokenAddress,
-      tokenName,
-      tokenSymbol,
-      tokenDecimals,
-      network
-    }
+    formField: { tokenAddress, tokenName, tokenSymbol, tokenDecimals, network },
   } = props;
 
   const { values: formValues } = useFormikContext();
   const classes = useStyles();
 
   useEffect(() => {
-    if(ethereum) {
-      if(formValues.tokenAddress.length === 42) {
+    if (ethereum) {
+      if (formValues.tokenAddress.length === 42) {
         let provider = new ethers.providers.Web3Provider(ethereum);
         let signer = provider.getSigner();
         contract = new ethers.Contract(formValues.tokenAddress, abi, signer);
 
         async function getTokenName() {
-          let tokenName = await contract.name();  
+          let tokenName = await contract.name();
           setTokenName(tokenName);
         }
 
         async function getTokenSymbol() {
-          let tokenSymbol = await contract.symbol();  
+          let tokenSymbol = await contract.symbol();
           setTokenSymbol(tokenSymbol);
         }
 
         async function getTokenDecimals() {
-          let tokenDecimals = await contract.decimals();  
+          let tokenDecimals = await contract.decimals();
           setTokenDecimals(tokenDecimals);
         }
 
@@ -61,7 +62,7 @@ export default function TokenForm(props) {
         getTokenDecimals();
       }
     } else {
-      alert("Please connect your wallet");
+      toast.error("Please connect your wallet");
     }
   });
 
@@ -72,7 +73,11 @@ export default function TokenForm(props) {
       </Typography> */}
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <InputField name={tokenAddress.name} label={tokenAddress.label} fullWidth />
+          <InputField
+            name={tokenAddress.name}
+            label={tokenAddress.label}
+            fullWidth
+          />
         </Grid>
         <HiddenField name={tokenName.name} value={t_name} />
         <HiddenField name={tokenSymbol.name} value={t_symbol} />
@@ -95,7 +100,7 @@ export default function TokenForm(props) {
             </List>
           </Grid>
         )}
-        
+
         <Grid item xs={12}>
           <SelectField
             name={network.name}

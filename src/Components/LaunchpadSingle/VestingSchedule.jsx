@@ -3,7 +3,7 @@ import vestingSchedule from "../../assets/data/vestingSchedule";
 
 const VestingSchedule = () => {
   return (
-    <table class="vesting-schedule table">
+    <table className="vesting-schedule table">
       <thead>
         <tr>
           <th scope="col">Date</th>
@@ -15,11 +15,15 @@ const VestingSchedule = () => {
         {vestingSchedule.map(({ id, date, time, token, amount }) => (
           <tr key={id}>
             <td>
-                <span>{date}</span>
-                <span>{time}</span>
+              <span>{date}</span>
+              <span>{time}</span>
             </td>
-            <td><span>{token}</span></td>
-            <td><span>{amount}</span></td>
+            <td>
+              <span>{token}</span>
+            </td>
+            <td>
+              <span>{amount}</span>
+            </td>
           </tr>
         ))}
       </tbody>
