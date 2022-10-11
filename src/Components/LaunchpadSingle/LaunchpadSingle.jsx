@@ -27,10 +27,8 @@ const LaunchpadSingle = (props) => {
   const [weiRaised, setWeiRaised] = useState(0);
   const [data, setData] = useState([]);
   const [isScrollTop, setScrollTop] = useState(true);
-  // const staking_contract = "0x8083d959537249e83b9166fafb315688f4426874"; // ropsten
-  const staking_contract = "0x500dD81f4612eda2027EFe69FA6aBDfFb3bD8A4c"; // syscoin
-  const stakingLimit = 50000;
-  // const stakingLimit = 250;
+  const staking_contract = "0xfDd20409e0Eccd4bb15D2D9F7B2cD46CA40A530D"; // syscoin
+  const stakingLimit = 250;
 
   const startTime = data.start;
 
@@ -78,6 +76,7 @@ const LaunchpadSingle = (props) => {
   }, [data]);
 
   async function buyTokens() {
+    console.log(stakeAmount);
     if(buyAmnt > 0) {
         if(buyAmnt > data.max_buy) {
           alert('cannot buy more than:' + data.maxBuy + ' SYS.')    
