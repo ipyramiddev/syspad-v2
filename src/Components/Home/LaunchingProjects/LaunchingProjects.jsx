@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import Countdown from 'react-countdown';
+import moment from 'moment'
 
 // import assets
 import img4 from '../../../assets/img/projects4.png';
@@ -11,7 +13,6 @@ import pIconImg from '../../../assets/img/private_icon.png';
 // import smart contract
 import { ethers } from 'ethers';
 import token_abi from '../../../contracts/Token_abi.json';
-import CountDown from '../../../assets/data/project/CountDown';
 
 // import firebase
 import { getDocs } from 'firebase/firestore';
@@ -57,6 +58,15 @@ const LaunchingProjects = () => {
             })
             .catch(error => console.log(error.message));
     }
+    // Renderer callback with condition
+    const countDownRenderer = ({ days, hours, minutes, seconds, completed }) => {
+        if (completed) {
+            return <span>Ends</span>;
+        } else {
+        // Render a countdown
+            return <span>{days}days {hours}:{minutes}:{seconds}</span>;
+        }
+    };
 
     return (
         <div className="launchingSoon-area pt-100 pb-150" id="launching-projects">
@@ -69,31 +79,57 @@ const LaunchingProjects = () => {
                     </div>
                 </div>
                 <div className="row mt-4">
-                    {idoProjects.map((project, index) => (
-                        <div className="col-lg-4 col-md-6" key={index}>
-                            <div className="projects-item mt-4">
-                                <Link to='/launchpad_single#' className='projects-images' state={project.id} >
-                                    <img src={img4} alt="images" />
-                                </Link>
-                                <div className="projects-text">
-                                    <img src={admin} alt="image" />
-                                    <div className="h4 text-white pt-3 pb-2">{project.data.name}</div>
-                                    <span>{project.data.token_symbol}</span>
-                                    <p>{project.data.description}</p>
-                                    <ul>
-                                        <CountDown data={project.id}></CountDown>
-                                        <li><span>Fundraise Goal</span> <span>{project.data.hardcap} SYS</span></li>
-                                        <li><span>Max Allocation </span> <span>{project.data.max_buy} SYS</span></li>
-                                    </ul>
-                                </div>
-                                <div className="projects-btn">
-                                    <Link to="/launchpad_single#" state={project.id} >
-                                        token sale
+                    {idoProjects.map((project, index) => {
+                        const startDate = moment(project.data.start)
+                        const endDate = moment(project.data.end)
+                        const now = moment()
+                        var pStatus = 0
+                        if(now.isBefore(startDate)) {
+                            pStatus = 0
+                        } else if(now.isBefore(endDate)) {
+                            pStatus = 1
+                        } else {
+                            pStatus = 2
+                        }
+                        return (
+                            <div className="col-lg-4 col-md-6" key={index}>
+                                <div className="projects-item mt-4">
+                                    <Link to='/launchpad_single#' className='projects-images' state={project.id} >
+                                        <img src={img4} alt="images" />
                                     </Link>
+                                    <div className="projects-text">
+                                        <img src={admin} alt="image" />
+                                        <div className="h4 text-white pt-3 pb-2">{project.data.name}</div>
+                                        <span>{project.data.token_symbol}</span>
+                                        <p>{project.data.description}</p>
+                                        <ul>
+                                            <li>
+                                                <span>{pStatus == 0 ? 'Starts In' : 'Ends In'}</span>
+                                                {
+                                                    pStatus < 2 &&
+                                                    <Countdown
+                                                        date={pStatus == 0 ? startDate.valueOf() : endDate.valueOf()}
+                                                        renderer={countDownRenderer}
+                                                    />
+                                                }
+                                                {
+                                                    pStatus == 2 &&
+                                                    <span>Ends</span>
+                                                }
+                                            </li>  
+                                            <li><span>Fundraise Goal</span> <span>{project.data.hardcap} SYS</span></li>
+                                            <li><span>Max Allocation </span> <span>{project.data.max_buy} SYS</span></li>
+                                        </ul>
+                                    </div>
+                                    <div className="projects-btn">
+                                        <Link to="/launchpad_single#" state={project.id} >
+                                            token sale
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        )
+                    })}
 
                     <div className="col-lg-4 col-md-6">
                         <div className="projects-item mt-4">
