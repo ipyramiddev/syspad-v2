@@ -9816,6 +9816,11 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-mui-confirm@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-mui-confirm/-/react-mui-confirm-1.0.1.tgz#3f926623d9517dbcd5933d010a76ba327b6c73f6"
+  integrity sha512-tSGVZfFYrefBh/N8nOeIJAt3nwmFZi7roU9F9P/31iplTvZEAp/v5deA81xYH6dfTZ3e7mcPDKXIn2q75EU44w==
+
 react-redux@^8.0.2:
   version "8.0.2"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-8.0.2.tgz#bc2a304bb21e79c6808e3e47c50fe1caf62f7aad"
