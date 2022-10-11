@@ -9,6 +9,7 @@ import Stake from './pages/Stake.jsx';
 import LaunchpadSingle from './pages/Launchpad_Single';
 import LaunchpadPrivateSale from './pages/Launchpad_PrivateSale';
 import CreateLaunchpad from './pages/CreateLaunchpad';
+import IDOManage from './pages/IDOManage';
 import Kyc from './pages/Kyc';
 import Admin from './pages/Admin';
 import { ToastContainer } from 'react-toastify';
@@ -29,6 +30,7 @@ function App() {
           <Route path="launchpad_single" element={<LaunchpadSingle />} />
           <Route path="launchpad_privatesale" element={<LaunchpadPrivateSale />} />
           <Route path="create_launchpad" element={<CreateLaunchpad />} />
+          <Route path="ido_manage" element={<IDOManage />} />
           <Route path="kyc" element={<Kyc />} />
           {/* <Route path="accounts" element={<Accounts />} /> */}
           <Route path="admin" element={<Admin />} />

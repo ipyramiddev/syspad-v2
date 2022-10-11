@@ -257,6 +257,9 @@ const Header = () => {
                                         <li className="dropdown-list">
                                             <Link to="/create_launchpad">Create Launchpad</Link>
                                         </li>
+                                        <li className="dropdown-list">
+                                            <Link to="/ido_manage">IDO Management</Link>
+                                        </li>
                                     </ul>
                                 </li>
                             }
