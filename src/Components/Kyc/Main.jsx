@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useForm } from "@formcarry/react";
 import SwipeableViews from 'react-swipeable-views';
 import { DropzoneArea } from 'material-ui-dropzone';
 import PropTypes from 'prop-types';
@@ -117,6 +118,10 @@ const CustomSelectField = styled(TextField)(({ theme }) => ({
         color: '#e6effb',
     },
 }));
+const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
+    display: 'block !important',
+    padding: '6px 16px !important',
+}));
 
 const CustomCheckbox = styled(Checkbox)(({ theme }) => ({
     color: '#e6effb',
@@ -181,6 +186,8 @@ const KycMain = () => {
     const [isRewardClaim, setRewardClaim] = useState(false);
     const [KYCStep, setKYCStep] = useState(0);
     const [documentType, setDocumentType] = useState(0);
+    const [selfie, setSelfie] = useState(null);
+    const [passport, setPassport] = useState(null);
 
     // const [i_contribution, setIDOContribution] = useState(0);
     // const [i_end, setIDOEnd] = useState(0);
@@ -229,7 +236,22 @@ const KycMain = () => {
         createVestingData('Staking Reward', '#', stakeReward, totalStaked, "#", <Button className='claim-btn text-white element' onClick={claimStakingRewards}>Claim Rewards</Button>, isRewardClaim),
         // createVestingData('SYSPAD Project', '100%', i_contribution, i_contribution, "#", <Button className='claim-btn text-white element' onClick={claimIDOTokens}>Claim Rewards</Button>, i_isClaim)
     ];
+    const formCarry = useForm({
+        id: "Q7Qe4ZVcu"
+    });
 
+    // Success message
+    // if (state.submitted) {
+    //     return <div>Thank you! We received your submission.</div>;
+    // }
+    const handleSelfieChange = (files) => {
+        setSelfie(files)
+        console.log("selfie", files)
+    }
+    const handlePassportChange = (files) => {
+        setPassport(files)
+        console.log("passport", files);
+    }
     useEffect(() => {
         if (ethereum) {
             async function contract_interact() {
@@ -288,7 +310,7 @@ const KycMain = () => {
         // if(i_end < current && i_contribution > 0) {
         //     setIDOClaimable(true);
         // }
-    });
+    }, []);
 
     async function claimPrivateSaleTokens() {
         let tx = await contract.claimTokens();
@@ -371,273 +393,287 @@ const KycMain = () => {
                                         <div className="header">
                                             Begin your ID-Verification
                                         </div>
-                                        <div className="content text-center p2rem-nobottom">
-                                            <div className='stepbox step-header'>
-                                                <div className='step-circle'>01</div>
-                                                <div className='step-title'>
-                                                    <p className='title1'>Personal Details</p>
-                                                    <p>Your basic personal information is required for identification purposes.</p>
+                                        <form onSubmit={formCarry.submit}>
+                                            <div className="content text-center p2rem-nobottom">
+                                                <div className='stepbox step-header'>
+                                                    <div className='step-circle'>01</div>
+                                                    <div className='step-title'>
+                                                        <p className='title1'>Personal Details</p>
+                                                        <p>Your basic personal information is required for identification purposes.</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className='stepbox step-content'>
-                                                <div className='step-info'>
-                                                    <AiFillInfoCircle />
-                                                    <p>Please type carefully and fill out the form with your personal details. You are not allowed to edit the details once you have submitted the application.</p>
-                                                </div>
-                                                <div className='step1'>
-                                                    <Box
-                                                        component="form"
-                                                        noValidate
-                                                        autoComplete="off"
-                                                    >
-                                                        <div>
-                                                            <CustomTextField
-                                                                required
-                                                                id="standard-required"
-                                                                label="First Name"
-                                                                defaultValue=""
-                                                                variant="standard"
-                                                            />
-                                                            <CustomTextField
-                                                                required
-                                                                id="standard-required"
-                                                                label="Last Name"
-                                                                defaultValue=""
-                                                                variant="standard"
-                                                            />
-                                                            <CustomTextField
-                                                                id="standard-helperText"
-                                                                label="Date of Birth"
-                                                                defaultValue=""
-                                                                variant="standard"
-                                                            />
-                                                            <CustomSelectField
-                                                                required
-                                                                id="standard-select-currency"
-                                                                select
-                                                                label="Gender"
-                                                                helperText=""
-                                                                variant="standard"
-                                                            >
-                                                                <MenuItem value={"M"}>{"Male"}</MenuItem>
-                                                                <MenuItem value={"F"}>{"Female"}</MenuItem>
-                                                            </CustomSelectField>
-                                                            <CustomTextField
-                                                                id="standard-required"
-                                                                label="Telegram Username"
-                                                                defaultValue=""
-                                                                variant="standard"
-                                                            />
-                                                        </div>
-                                                        <div className="txtAddress">Your Address</div>
-                                                        <div>
-                                                            <CustomSelectField
-                                                                required
-                                                                id="standard-select-currency"
-                                                                select
-                                                                label="Country"
-                                                                helperText=""
-                                                                variant="standard"
-                                                            >
-                                                                <MenuItem value={"US"}>{"United States of America"}</MenuItem>
-                                                                <MenuItem value={"UA"}>{"Ukraine"}</MenuItem>
-                                                                <MenuItem value={"IR"}>{"Ireland"}</MenuItem>
-                                                            </CustomSelectField>
-                                                            <CustomTextField
-                                                                required
-                                                                id="standard-required"
-                                                                label="State"
-                                                                defaultValue=""
-                                                                variant="standard"
-                                                            />
-                                                            <CustomTextField
-                                                                required
-                                                                id="standard-helperText"
-                                                                label="City"
-                                                                defaultValue=""
-                                                                variant="standard"
-                                                            />
-                                                            <CustomTextField
-                                                                required
-                                                                id="standard-required"
-                                                                label="Zip / Postal Code"
-                                                                defaultValue=""
-                                                                variant="standard"
-                                                            />
-                                                            <CustomTextField
-                                                                required
-                                                                id="standard-required"
-                                                                label="Address Line1"
-                                                                defaultValue=""
-                                                                variant="standard"
-                                                            />
-                                                            <CustomTextField
-                                                                required
-                                                                id="standard-required"
-                                                                label="Address Line2"
-                                                                defaultValue=""
-                                                                variant="standard"
-                                                            />
-                                                        </div>
-                                                    </Box>
-                                                </div>
-                                            </div>
-
-                                            <div className='stepbox step-header'>
-                                                <div className='step-circle'>02</div>
-                                                <div className='step-title'>
-                                                    <p className='title1'>Document Upload</p>
-                                                    <p>To verify your identity, we ask you to upload high-quality scans or photos of your official identification documents issued by the government.</p>
-                                                </div>
-                                            </div>
-                                            <div className='stepbox step-content'>
-                                                <div className='step-info'>
-                                                    <AiFillInfoCircle />
-                                                    <p>In order to complete, please upload any of the following personal documents.</p>
-                                                </div>
-                                                <div className='step2'>
-                                                    <Grid
-                                                        container
-                                                        direction="row"
-                                                        justifyContent="center"
-                                                        alignItems="center"
-                                                        marginTop="30px"
-                                                    >
-                                                        <Grid item xs={4} >
-                                                            <div className={`verify-type-box ${documentType == 0 ? 'active' : ''}`} onClick={() => setDocumentType(0)}>
-                                                                <AiOutlineAndroid className='img-verify' />
-                                                                <p>PASSPORT</p>
-                                                                {documentType == 0 && <AiFillCheckCircle className='img-check' />}
+                                                <div className='stepbox step-content'>
+                                                    <div className='step-info'>
+                                                        <AiFillInfoCircle />
+                                                        <p>Please type carefully and fill out the form with your personal details. You are not allowed to edit the details once you have submitted the application.</p>
+                                                    </div>
+                                                    <div className='step1'>
+                                                        <Box
+                                                            noValidate
+                                                            autoComplete="off"
+                                                        >
+                                                            <div>
+                                                                <CustomTextField
+                                                                    required
+                                                                    id="firstname"
+                                                                    name="firstname"
+                                                                    label="First Name"
+                                                                    defaultValue=""
+                                                                    variant="standard"
+                                                                />
+                                                                <CustomTextField
+                                                                    required
+                                                                    id="lastname"
+                                                                    name="lastname"
+                                                                    label="Last Name"
+                                                                    defaultValue=""
+                                                                    variant="standard"
+                                                                />
+                                                                <CustomTextField
+                                                                    id="birthday"
+                                                                    name="birthday"
+                                                                    label="Date of Birth"
+                                                                    defaultValue=""
+                                                                    variant="standard"
+                                                                />
+                                                                <CustomSelectField
+                                                                    required
+                                                                    id="gender"
+                                                                    name="gender"
+                                                                    select
+                                                                    label="Gender"
+                                                                    helperText=""
+                                                                    variant="standard"
+                                                                >
+                                                                    <CustomMenuItem value={"M"}>{"Male"}</CustomMenuItem>
+                                                                    <CustomMenuItem value={"F"}>{"Female"}</CustomMenuItem>
+                                                                </CustomSelectField>
+                                                                <CustomTextField
+                                                                    id="telegram"
+                                                                    name="telegram"
+                                                                    label="Telegram Username"
+                                                                    defaultValue=""
+                                                                    variant="standard"
+                                                                />
                                                             </div>
-                                                        </Grid>
-                                                        <Grid item xs={4} >
-                                                            <div className={`verify-type-box ${documentType == 1 ? 'active' : ''}`} onClick={() => setDocumentType(1)}>
-                                                                <AiOutlineAndroid className='img-verify' />
-                                                                <p>NATIONAL ID CARD</p>
-                                                                {documentType == 1 && <AiFillCheckCircle className='img-check' />}
+                                                            <div className="txtAddress">Your Address</div>
+                                                            <div>
+                                                                <CustomSelectField
+                                                                    required
+                                                                    id="country"
+                                                                    name="country"
+                                                                    select
+                                                                    label="Country"
+                                                                    helperText=""
+                                                                    variant="standard"
+                                                                >
+                                                                    <CustomMenuItem value={"US"}>{"United States of America"}</CustomMenuItem>
+                                                                    <CustomMenuItem value={"UA"}>{"Ukraine"}</CustomMenuItem>
+                                                                    <CustomMenuItem value={"IR"}>{"Ireland"}</CustomMenuItem>
+                                                                </CustomSelectField>
+                                                                <CustomTextField
+                                                                    required
+                                                                    id="state"
+                                                                    name="state"
+                                                                    label="State"
+                                                                    defaultValue=""
+                                                                    variant="standard"
+                                                                />
+                                                                <CustomTextField
+                                                                    required
+                                                                    id="city"
+                                                                    name="city"
+                                                                    label="City"
+                                                                    defaultValue=""
+                                                                    variant="standard"
+                                                                />
+                                                                <CustomTextField
+                                                                    required
+                                                                    id="zipcode"
+                                                                    name="zipcode"
+                                                                    label="Zip / Postal Code"
+                                                                    defaultValue=""
+                                                                    variant="standard"
+                                                                />
+                                                                <CustomTextField
+                                                                    required
+                                                                    id="address"
+                                                                    name="address"
+                                                                    label="Address Line1"
+                                                                    defaultValue=""
+                                                                    variant="standard"
+                                                                />
+                                                                <CustomTextField
+                                                                    required
+                                                                    id="address2"
+                                                                    name="address2"
+                                                                    label="Address Line2"
+                                                                    defaultValue=""
+                                                                    variant="standard"
+                                                                />
                                                             </div>
+                                                        </Box>
+                                                    </div>
+                                                </div>
+
+                                                <div className='stepbox step-header'>
+                                                    <div className='step-circle'>02</div>
+                                                    <div className='step-title'>
+                                                        <p className='title1'>Document Upload</p>
+                                                        <p>To verify your identity, we ask you to upload high-quality scans or photos of your official identification documents issued by the government.</p>
+                                                    </div>
+                                                </div>
+                                                <div className='stepbox step-content'>
+                                                    <div className='step-info'>
+                                                        <AiFillInfoCircle />
+                                                        <p>In order to complete, please upload any of the following personal documents.</p>
+                                                    </div>
+                                                    <div className='step2'>
+                                                        <Grid
+                                                            container
+                                                            direction="row"
+                                                            justifyContent="center"
+                                                            alignItems="center"
+                                                            marginTop="30px"
+                                                        >
+                                                            <Grid item xs={4} >
+                                                                <div className={`verify-type-box ${documentType == 0 ? 'active' : ''}`} onClick={() => setDocumentType(0)}>
+                                                                    <AiOutlineAndroid className='img-verify' />
+                                                                    <p>PASSPORT</p>
+                                                                    {documentType == 0 && <AiFillCheckCircle className='img-check' />}
+                                                                </div>
+                                                            </Grid>
+                                                            <Grid item xs={4} >
+                                                                <div className={`verify-type-box ${documentType == 1 ? 'active' : ''}`} onClick={() => setDocumentType(1)}>
+                                                                    <AiOutlineAndroid className='img-verify' />
+                                                                    <p>NATIONAL ID CARD</p>
+                                                                    {documentType == 1 && <AiFillCheckCircle className='img-check' />}
+                                                                </div>
+                                                            </Grid>
+                                                            <Grid item xs={4} >
+                                                                <div className={`verify-type-box ${documentType == 2 ? 'active' : ''}`} onClick={() => setDocumentType(2)}>
+                                                                    <AiOutlineAndroid className='img-verify' />
+                                                                    <p>DRIVER'S LICENSE</p>
+                                                                    {documentType == 2 && <AiFillCheckCircle className='img-check' />}
+                                                                </div>
+                                                            </Grid>
                                                         </Grid>
-                                                        <Grid item xs={4} >
-                                                            <div className={`verify-type-box ${documentType == 2 ? 'active' : ''}`} onClick={() => setDocumentType(2)}>
-                                                                <AiOutlineAndroid className='img-verify' />
-                                                                <p>DRIVER'S LICENSE</p>
-                                                                {documentType == 2 && <AiFillCheckCircle className='img-check' />}
+                                                    </div>
+                                                    <div className='step2'>
+                                                        <div className='des-title'>To avoid deplays with verification process, please double-check to ensure the below requirements are fully met:</div>
+                                                        <div className='des-item'>
+                                                            <AiOutlineCheck />
+                                                            <p>Chosen credential must not be expired.</p>
+                                                        </div>
+                                                        <div className='des-item'>
+                                                            <AiOutlineCheck />
+                                                            <p>Document should be in good condition and clearly visible.</p>
+                                                        </div>
+                                                        <div className='des-item'>
+                                                            <AiOutlineCheck />
+                                                            <p>There is no light glare or reflections on the card.</p>
+                                                        </div>
+                                                        <div className='des-item'>
+                                                            <AiOutlineCheck />
+                                                            <p>File is at least 1MB in size and has at least 300 dpi resolution.</p>
+                                                        </div>
+                                                        <div className='des-item'>
+                                                            <AiOutlineCheck />
+                                                            <p>Chosen credential must not be expired.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className='step2'>
+                                                        <div className='des-title'>Upload Here Your Passport Copy</div>
+                                                        <div className='upload-container'>
+                                                            <div className="upload-img">
+                                                                <DropzoneArea
+                                                                    acceptedFiles={['image/*']}
+                                                                    onChange={handlePassportChange}
+                                                                    showFileNames
+                                                                    dropzoneText="Drag and drop file"
+                                                                    showAlerts={false}
+                                                                    filesLimit={1}
+                                                                />
                                                             </div>
-                                                        </Grid>
-                                                    </Grid>
-                                                </div>
-                                                <div className='step2'>
-                                                    <div className='des-title'>To avoid deplays with verification process, please double-check to ensure the below requirements are fully met:</div>
-                                                    <div className='des-item'>
-                                                        <AiOutlineCheck />
-                                                        <p>Chosen credential must not be expired.</p>
-                                                    </div>
-                                                    <div className='des-item'>
-                                                        <AiOutlineCheck />
-                                                        <p>Document should be in good condition and clearly visible.</p>
-                                                    </div>
-                                                    <div className='des-item'>
-                                                        <AiOutlineCheck />
-                                                        <p>There is no light glare or reflections on the card.</p>
-                                                    </div>
-                                                    <div className='des-item'>
-                                                        <AiOutlineCheck />
-                                                        <p>File is at least 1MB in size and has at least 300 dpi resolution.</p>
-                                                    </div>
-                                                    <div className='des-item'>
-                                                        <AiOutlineCheck />
-                                                        <p>Chosen credential must not be expired.</p>
-                                                    </div>
-                                                </div>
-                                                <div className='step2'>
-                                                    <div className='des-title'>Upload Here Your Passport Copy</div>
-                                                    <div className='upload-container'>
-                                                        <div className="upload-img">
-                                                            <DropzoneArea
-                                                                acceptedFiles={['image/*']}
-                                                                // onChange={this.handleChange.bind(this)}
-                                                                showFileNames
-                                                                dropzoneText="Drag and drop file"
-                                                                showAlerts={false}
-                                                                filesLimit={1}
-                                                            />
+                                                            <div className='sample-img'>
+                                                                <img src={Verify1} alt="image" />
+                                                            </div>
                                                         </div>
-                                                        <div className='sample-img'>
-                                                            <img src={Verify1} alt="image" />
+                                                    </div>
+                                                    <div className='step2 step2-divide'>
+                                                        <div className='des-title'>Upload a selfie as a Photo Proof while holding document in your hand</div>
+                                                        <div className='upload-container'>
+                                                            <div className="upload-img">
+                                                                <DropzoneArea
+                                                                    acceptedFiles={['image/*']}
+                                                                    onChange={handleSelfieChange}
+                                                                    showFileNames
+                                                                    dropzoneText="Drag and drop file"
+                                                                    showAlerts={false}
+                                                                    filesLimit={1}
+                                                                />
+                                                            </div>
+                                                            <div className='sample-img'>
+                                                                <img src={Verify2} alt="image" />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className='step2 step2-divide'>
-                                                    <div className='des-title'>Upload a selfie as a Photo Proof while holding document in your hand</div>
-                                                    <div className='upload-container'>
-                                                        <div className="upload-img">
-                                                            <DropzoneArea
-                                                                acceptedFiles={['image/*']}
-                                                                // onChange={this.handleChange.bind(this)}
-                                                                showFileNames
-                                                                dropzoneText="Drag and drop file"
-                                                                showAlerts={false}
-                                                                filesLimit={1}
-                                                            />
-                                                        </div>
-                                                        <div className='sample-img'>
-                                                            <img src={Verify2} alt="image" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
 
-                                            <div className='stepbox step-header'>
-                                                <div className='step-circle'>03</div>
-                                                <div className='step-title'>
-                                                    <p className='title1'>Your Paying Wallet</p>
-                                                    <p>Submit your wallet address that you are going to send funds.</p>
+                                                <div className='stepbox step-header'>
+                                                    <div className='step-circle'>03</div>
+                                                    <div className='step-title'>
+                                                        <p className='title1'>Your Paying Wallet</p>
+                                                        <p>Submit your wallet address that you are going to send funds.</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className='stepbox step-content'>
-                                                <div className='step-info'>
-                                                    <AiFillInfoCircle />
-                                                    <p>DO NOT USE your exchange wallet address such as Kraken, Bitfinex, Bithumb, Binance etc.</p>
+                                                <div className='stepbox step-content'>
+                                                    <div className='step-info'>
+                                                        <AiFillInfoCircle />
+                                                        <p>DO NOT USE your exchange wallet address such as Kraken, Bitfinex, Bithumb, Binance etc.</p>
+                                                    </div>
+                                                    <div className='step3'>
+                                                        <CustomSelectField
+                                                            required
+                                                            id="wallet"
+                                                            name="wallet"
+                                                            select
+                                                            label="Select Wallet"
+                                                            helperText=""
+                                                            variant="standard"
+                                                        >
+                                                            <CustomMenuItem value={"eth"}>{"Ethereum"}</CustomMenuItem>
+                                                            <CustomMenuItem value={"sol"}>{"Solana"}</CustomMenuItem>
+                                                        </CustomSelectField>
+                                                    </div>
+                                                    <div className='step3'>
+                                                        <CustomFullTextField
+                                                            required
+                                                            id="wallet_addr"
+                                                            name="wallet_addr"
+                                                            label="Enter your wallet address"
+                                                            defaultValue=""
+                                                            variant="standard"
+                                                            helperText="Note: Address should be ERC20-compliant"
+                                                        />
+                                                    </div>
                                                 </div>
-                                                <div className='step3'>
-                                                    <CustomSelectField
-                                                        required
-                                                        id="standard-select-currency"
-                                                        select
-                                                        label="Select Wallet"
-                                                        helperText=""
-                                                        variant="standard"
-                                                    >
-                                                        <MenuItem value={"eth"}>{"Ethereum"}</MenuItem>
-                                                        <MenuItem value={"sol"}>{"Solana"}</MenuItem>
-                                                    </CustomSelectField>
-                                                </div>
-                                                <div className='step3'>
-                                                    <CustomFullTextField
-                                                        required
-                                                        id="standard-required"
-                                                        label="Enter your wallet address"
-                                                        defaultValue=""
-                                                        variant="standard"
-                                                        helperText="Note: Address should be ERC20-compliant"
-                                                    />
-                                                </div>
-                                            </div>
 
-                                            <div className='stepbox step-content'>
-                                                <div className='step4'>
-                                                    <FormGroup>
-                                                        <CustomFormControlLabel control={<CustomCheckbox />} label={<p>I have read the Terms and Condition and Privacy and Policy.</p>} />
-                                                        <CustomFormControlLabel control={<CustomCheckbox />} label={<p>All the personal information I have entered is correct</p>} />
-                                                        <CustomFormControlLabel control={<CustomCheckbox />} label={<p>I certify that, I am registering to participate in the token distribution event(s) in the capacity of an individual(and beneficial owner) and not as an agent or representative of a third party corporate entity.</p>} />
-                                                        <CustomFormControlLabel control={<CustomCheckbox />} label={<p>I understand that, I can participate in the token distribution event(s) only with the wallet address that was entered in the application form.</p>} />
-                                                    </FormGroup>
-                                                </div>
-                                                <div className='step4'>
-                                                    <Button className='btnSave' onClick={() => setKYCStep(2)}>Proceed to Verify</Button>
+                                                <div className='stepbox step-content'>
+                                                    <div className='step4'>
+                                                        <FormGroup>
+                                                            <CustomFormControlLabel control={<CustomCheckbox />} label={<p>I have read the Terms and Condition and Privacy and Policy.</p>} />
+                                                            <CustomFormControlLabel control={<CustomCheckbox />} label={<p>All the personal information I have entered is correct</p>} />
+                                                            <CustomFormControlLabel control={<CustomCheckbox />} label={<p>I certify that, I am registering to participate in the token distribution event(s) in the capacity of an individual(and beneficial owner) and not as an agent or representative of a third party corporate entity.</p>} />
+                                                            <CustomFormControlLabel control={<CustomCheckbox />} label={<p>I understand that, I can participate in the token distribution event(s) only with the wallet address that was entered in the application form.</p>} />
+                                                        </FormGroup>
+                                                    </div>
+                                                    <div className='step4'>
+                                                        <Button type="submit" className='btnSave'>Proceed to Verify</Button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </>
                                 }
                                 {
