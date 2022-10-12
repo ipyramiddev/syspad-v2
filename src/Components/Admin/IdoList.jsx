@@ -1,12 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useAppContext } from "../../context/AppContext";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // import firebase
 import {
   query,
-  where,
   getDocs,
   doc,
   deleteDoc,
@@ -71,8 +70,7 @@ const IdoList = () => {
   const [curDocId, setCurDocId] = useState("");
 
   const [pName, setName] = useState("");
-  const [pAddress, setAddress] = useState("");
-  const [pTokenAddr, setTokenAddress] = useState("");
+  const [pDesc, setDescription] = useState("");
 
   const confirm = useConfirmDialog();
 
@@ -108,12 +106,12 @@ const IdoList = () => {
   };
   const modifyIdo = async () => {
     setLoading(true);
-    if (curDocId == "") {
+    if (curDocId === "") {
       toast.error("something error!");
       setLoading(false);
       return;
     }
-    if (pName == "" || pAddress == "" || pTokenAddr == "") {
+    if (pName === "" || pDesc === "") {
       setLoading(false);
       toast.error("input required fields!");
       return;
@@ -121,8 +119,7 @@ const IdoList = () => {
     try {
       await updateDoc(doc(projectCollectionRef, curDocId), {
         name: pName,
-        address: pAddress,
-        token_address: pTokenAddr,
+        description: pDesc,
       });
       await getIdos();
       toast.success("IDO project updated!");
@@ -165,11 +162,15 @@ const IdoList = () => {
           >
             <TableHead>
               <TableRow>
-                <StyledTableCell>Project Name</StyledTableCell>
-                <StyledTableCell align="center">
-                  Contract Address
+                <StyledTableCell>
+                  Project Name
                 </StyledTableCell>
-                <StyledTableCell align="center">Token Address</StyledTableCell>
+                <StyledTableCell align="center">
+                  Token
+                </StyledTableCell>
+                <StyledTableCell align="center">hardcap</StyledTableCell>
+                <StyledTableCell align="center">max_buy</StyledTableCell>
+                <StyledTableCell align="center">rate</StyledTableCell>
                 <StyledTableCell align="center">*</StyledTableCell>
               </TableRow>
             </TableHead>
@@ -180,19 +181,29 @@ const IdoList = () => {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <StyledTableCell component="th" scope="row">
-                    {row.data.name}
+                    <a href={"https://explorer.syscoin.org/address/" + row.data.address + "/contracts"} target="_blank" rel="noreferrer">
+                      {row.data.name}
+                    </a>
                   </StyledTableCell>
                   <StyledTableCell align="center">
-                    {row.data.address}
+                    <a href={"https://explorer.syscoin.org/address/" + row.data.token_address + "/contracts"} target="_blank" rel="noreferrer">
+                      {row.data.token_symbol}
+                    </a>
                   </StyledTableCell>
                   <StyledTableCell align="center">
-                    {row.data.token_address}
+                    {row.data.hardcap}
                   </StyledTableCell>
                   <StyledTableCell align="center">
-                    {curDocId == row.id && isLoading && (
+                    {row.data.max_buy}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    {row.data.rate}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    {curDocId === row.id && isLoading && (
                       <CircularProgress color="inherit" size={20} />
                     )}
-                    {(curDocId != row.id || !isLoading) && (
+                    {(curDocId !== row.id || !isLoading) && (
                       <>
                         <BorderColorIcon
                           sx={{ cursor: "pointer", mr: "20px" }}
@@ -234,21 +245,12 @@ const IdoList = () => {
             />
             <TextField
               margin="dense"
-              label="Contract Address"
+              label="Description"
               type="text"
-              value={pAddress}
+              value={pDesc}
               fullWidth
               variant="standard"
-              onChange={(e) => setAddress(e.target.value)}
-            />
-            <TextField
-              margin="dense"
-              label="Token Address"
-              type="text"
-              value={pTokenAddr}
-              fullWidth
-              variant="standard"
-              onChange={(e) => setTokenAddress(e.target.value)}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </DialogContent>
           <DialogActions>

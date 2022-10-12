@@ -145,7 +145,7 @@ const LaunchingProjects = () => {
                                     {/* <CountDown data={timeData}></CountDown> */}
                                     <li><span>Fundraise Goal</span> <span>{totalSale} SYS</span></li>
                                     <li><span>Max Allocation </span> <span>{totalSale} SYS</span></li>
-                                    <li><span></span> <span> <br/></span></li>
+                                    
                                 </ul>
                             </div>
                             <div className="projects-btn">

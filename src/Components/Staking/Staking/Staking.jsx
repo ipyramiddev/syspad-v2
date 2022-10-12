@@ -74,6 +74,7 @@ const Staking = () => {
     const [myStaked, setMyStaked] = useState("0.00");
     const [is_approved, setTokenApprove] = useState(false);
     const [isLoading, setLoading] = useState(false);
+    const [myAPY, setAPY] = useState("0.00");
     // const staking_contract = "0x8083d959537249e83b9166fafb315688f4426874"; // for ropsten
     const staking_contract = "0xfDd20409e0Eccd4bb15D2D9F7B2cD46CA40A530D";
     // const token_contract = "0x04dbe249f46418542df912184dfa79699baee80b"; // for ropsten
@@ -96,6 +97,10 @@ const Staking = () => {
 
                 let my_staked = await contract.stakeAmount(wallet_account);
                 setMyStaked(Math.ceil(my_staked.toString() / (10**18)));
+
+                let _factor = await contract.stakeRewardFactor();
+                let _apy = parseFloat((myStaked / totalStaked * _factor.toString() * 365) / myStaked * 100).toFixed(2);
+                setAPY(_apy);
 
                 t_contract = new ethers.Contract(token_contract, token_abi, signer);
 
@@ -276,21 +281,21 @@ const Staking = () => {
                         <div className="staking-status">
                             <div className="total-power row status-content">
                                 <div className="col-md-2">
-                                    <img src={totalPowerImg} alt="Total SYSPAD Power"/>
+                                    <img src={totalPowerImg} alt="Your Pool Share"/>
                                 </div>
                                 <div className="col-md-10">
-                                    <p className="status-header">TOTAL SYSPAD POWER</p>
-                                    <p className="status-amount text-white">{totalStaked}</p>
+                                    <p className="status-header">YOUR POOL SHARE</p>
+                                    <p className="status-amount text-white">{myStaked}</p>
                                 </div>
                             </div>
 
                             <div className="staked-amount row status-content mt-100">
                                 <div className="col-md-2">
-                                    <img src={stakedImg} alt="SYSPAD Staked"/>
+                                    <img src={stakedImg} alt="APY%"/>
                                 </div>
                                 <div className="col-md-10">
-                                    <p className="status-header">SYSPAD STAKED ON ETHEREUM</p>
-                                    <p className="status-amount text-white">{myStaked}</p>
+                                    <p className="status-header">APY%</p>
+                                    <p className="status-amount text-white">{myAPY}</p>
                                 </div>
                             </div>
 

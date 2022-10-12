@@ -642,8 +642,7 @@ const KycMain = () => {
                                                             helperText=""
                                                             variant="standard"
                                                         >
-                                                            <CustomMenuItem value={"eth"}>{"Ethereum"}</CustomMenuItem>
-                                                            <CustomMenuItem value={"sol"}>{"Solana"}</CustomMenuItem>
+                                                            <CustomMenuItem value={"sys"}>{"Syscoin"}</CustomMenuItem>
                                                         </CustomSelectField>
                                                     </div>
                                                     <div className='step3'>

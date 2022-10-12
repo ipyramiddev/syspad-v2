@@ -11,6 +11,10 @@
         margin-bottom: 100px;
     }
 
+    .MuiPaper-root {
+        background-color: unset !important;
+    }
+
     .MuiStepLabel-label {
         font-size: 20px;
         color: rgba(255, 255, 255, 0.54);
